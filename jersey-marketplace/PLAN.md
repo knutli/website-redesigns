@@ -51,6 +51,12 @@ Bilingual NB / EN from day one.
 
 ### Admin
 - Listing approval queue (auctions + buy-now). Locker uploads bypass.
+- **Two-click review flow** — admin scrolls the jersey's images (arrow keys /
+  swipe / click), then either **Approve** (one click, listing goes live) or
+  **Reject** (one click opens a short menu of frequent reasons + free-text
+  field). Decision is written to `listings.rejected_reason` /
+  `approved_by` / `approved_at` and an in-app + email notification fires to
+  the seller. Next item loads automatically so the reviewer can stay in flow.
 - User moderation, ban, shadow-ban
 - Report queue
 - Featured listings / homepage curation
@@ -61,7 +67,8 @@ Bilingual NB / EN from day one.
 
 ## 2. Information architecture
 
-Sidebar (desktop) / drawer + bottom nav (mobile):
+**No bottom nav.** Sidebar on desktop, slide-in drawer (hamburger) on mobile —
+same structure in both:
 
 ```
 [Oase]
@@ -86,8 +93,9 @@ Sidebar (desktop) / drawer + bottom nav (mobile):
   [+ Upload Jersey]   (primary CTA, sticky)
 ```
 
-Mobile bottom nav (5 slots): Feed · Browse · **+ Upload (FAB)** · Wishlist · Profile.
-Buying / Selling / Settings live behind the profile menu and a slide-in drawer.
+On mobile, a sticky top bar holds the hamburger (opens the drawer) and the
+Upload CTA. The drawer mirrors the desktop sidebar exactly so the IA is identical
+across breakpoints.
 
 ---
 
@@ -117,7 +125,7 @@ Buying / Selling / Settings live behind the profile menu and a slide-in drawer.
 | Database | **Postgres on Railway** | Single bill, predictable cost |
 | ORM | **Drizzle ORM** | Type-safe TS ORM, lightweight, no separate engine |
 | Cache / rate limit / queue bus | **Redis on Railway** | For rate limits, session extras, Soketi presence |
-| Auth | **Better Auth** | Self-hosted, Argon2id, 2FA, OAuth (Google + Apple), email verify, session rotation |
+| Auth | **Better Auth** | Self-hosted, Argon2id, 2FA, email verify. Buyers/bidders: email + password. Sellers: **Vipps Login** (Norway identity verification) |
 | Payments | **Stripe Connect (Express)** with Vipps + Klarna + cards | Destination charges, split payouts, escrow, KYC handled by Stripe |
 | Real-time | **Soketi** (self-hosted on Railway) | Pusher-protocol compatible, MIT. Gives us bidirectional channels for auctions, presence, DMs, typing indicators |
 | File storage | **Cloudflare R2** (storage) + **Cloudflare Image Resizing** (transforms at edge) | $0 egress, global CDN, on-the-fly resizing |
@@ -134,8 +142,12 @@ Buying / Selling / Settings live behind the profile menu and a slide-in drawer.
 - CSRF protection on all state-changing routes
 - Rate limiting on signin / signup / password-reset / bidding (Redis token bucket)
 - Email verification required before bidding or listing
-- Optional TOTP 2FA; strongly nudged for sellers before KYC
-- OAuth: Google + Apple (Vipps Login if available)
+- Optional TOTP 2FA for buyers; sellers verified via Vipps (identity-assured)
+- **Seller identity:** Vipps Login required before a user can list anything
+  for sale. In Norway (launch market) Vipps gives us name + phone + verified
+  identity tied to BankID. Once we expand to EU, we add equivalent identity
+  providers (e.g. iDIN, BankID.se, FranceConnect) per market
+- **Buyer / bidder:** email + password with verified email. 2FA optional
 - Stripe webhooks verified with signing secret; idempotency keys on all writes
 - No card data touches our servers — all via Stripe Elements / Checkout
 - Audit log for auth + admin + refund events
@@ -237,8 +249,8 @@ into the order. **Posten / Bring label API integration is a later milestone.**
 **M0 — Foundations (week 1)**
 - Repo + Next.js + Tailwind + shadcn scaffolding
 - Drizzle + Railway Postgres + initial schema
-- Better Auth flow + protected routes
-- App shell: sidebar, mobile bottom nav, theme toggle
+- Better Auth flow + protected routes (email/password for buyers, Vipps for sellers)
+- App shell: sidebar + mobile drawer (no bottom nav), theme toggle
 - Deployed to Railway (app + DB) behind a preview URL
 
 **M1 — Profile + Locker (week 2)**
@@ -293,31 +305,52 @@ into the order. **Posten / Bring label API integration is a later milestone.**
 ## 9. Decisions locked in
 
 - **Name:** Oase
-- **Auth:** Better Auth (self-hosted, Argon2id, 2FA optional, Google + Apple OAuth)
-- **Payments:** Stripe Connect (Express) — Vipps, Klarna, cards
+- **Domain:** `oase.ai` (currently a Webflow static page — we'll swap DNS when
+  Railway deploy is ready)
+- **Legal:** Operated by our AS. The AS is **platform operator and merchant
+  of record** for all transactions.
+- **Launch market:** Norway first. Rapid EU expansion right after.
+- **Auth:**
+  - Buyers / bidders: Better Auth email + password with verified email
+  - Sellers: Vipps Login (Norway identity check via BankID). Equivalent
+    identity providers added per EU market at expansion
+- **Payments:** Stripe Connect (Express) — Vipps MobilePay, Klarna, cards
 - **Commission:** **8% total, inclusive of Stripe fees.** Seller always gets 92%.
-- **KYC:** Required for any sale (no threshold)
+  Commission-only for now. **Subscriptions and ads are a later revenue lever**,
+  not in v1.
+- **KYC:** Required for any sale (no threshold) — Stripe Express does the KYC,
+  Vipps confirms identity at sign-in
+- **Minimum age:** 13
 - **Locker visibility default:** public
-- **Shipping v1:** seller pastes tracking number + carrier; Posten integration later
+- **Shipping v1:** **buyer pays**, added at checkout. Seller pastes tracking
+  number + carrier. Posten / Bring label API integration is a later milestone
+- **Navigation:** sidebar on desktop, slide-in drawer on mobile. **No bottom nav.**
+- **Admin review:** two-click approve/reject with scrollable image viewer
+  and canned rejection reasons + free-text
 - **Real-time:** Soketi from day one
 - **Images:** Cloudflare R2 + CF Image Resizing
 - **Hosting:** everything on Railway
-- **Repo:** `jersey-marketplace/` folder in this repo, on branch
-  `claude/jersey-marketplace-plan-1tK8Z`
+- **Repo:** `jersey-marketplace/` folder in this repo
 
 ## 10. Still open (can resolve as we go)
 
 - Brand palette + logo direction (placeholder: warm sand + deep teal)
-- 2FA — required for sellers or just nudged?
 - Display font choice for hero / editorial moments
-- Minimum account age before a user can list for sale (anti-fraud signal)
-- Whether buyers or sellers pay shipping by default (buyer pays, added at checkout, is standard)
+- Minimum account age (in days since signup) before a user can list for sale,
+  as an anti-fraud signal — separate from the age-13 minimum
+- Which EU identity providers to onboard first at expansion (iDIN NL,
+  BankID SE, FranceConnect, itsme BE are candidates)
 
 ---
 
-## 11. Build order if you greenlight
+## 11. Build order
 
 The M0 + M1 slice first: a deployable Oase shell on Railway with Better
-Auth, profile, settings, locker upload, and the sidebar/bottom-nav
-navigation working end to end. Real DB, real auth, real image upload —
-no mocks — so we have a foundation to layer auctions onto without rework.
+Auth (email for buyers, Vipps for sellers), profile, settings, locker
+upload, and the sidebar + mobile drawer navigation working end to end.
+Real DB, real auth, real image upload — no mocks — so we have a
+foundation to layer auctions onto without rework.
+
+See [`OUTSTANDING_SETUP.md`](./OUTSTANDING_SETUP.md) for the list of
+third-party accounts / keys / actions you need to complete before the
+scaffold can actually boot against live services.
