@@ -7,7 +7,9 @@ dist
 .env.local
 .env.*.local
 .DS_Store
+Thumbs.db
 *.log
+*.tsbuildinfo
 coverage
 .vercel
 .turbo
