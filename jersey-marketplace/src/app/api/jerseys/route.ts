@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import { headers } from "next/headers";
-import { randomUUID } from "node:crypto";
+import { randomUUID, randomBytes } from "node:crypto";
 import { auth } from "@/lib/auth";
 import { db } from "@/lib/db";
 import { jersey, jerseyImage, listing, sellerProfile } from "@/lib/db/schema";
@@ -9,6 +9,12 @@ import { r2 } from "@/lib/storage";
 import { env } from "@/lib/env";
 import { PutObjectCommand } from "@aws-sdk/client-s3";
 import { inngest } from "@/lib/inngest";
+import { detectAndTranslate } from "@/lib/translate";
+
+function newPublicId() {
+  // 8-char uppercase alphanumeric, e.g. "7F215554"
+  return randomBytes(4).toString("hex").toUpperCase();
+}
 
 export async function POST(req: Request) {
   const session = await auth.api.getSession({ headers: await headers() });
@@ -74,9 +80,12 @@ export async function POST(req: Request) {
     const buyNowPrice = numKr(form.get("buyNowPrice"));
     const durationHours = Number(form.get("durationHours") ?? 72);
 
+    const translation = j.description ? await detectAndTranslate(j.description) : null;
+
     const [l] = await db
       .insert(listing)
       .values({
+        publicId: newPublicId(),
         jerseyId: j.id,
         sellerId: session.user.id,
         type: destination,
@@ -90,6 +99,8 @@ export async function POST(req: Request) {
             ? new Date(Date.now() + durationHours * 3600 * 1000)
             : null,
         submittedAt: new Date(),
+        sourceLanguage: translation?.sourceLanguage ?? null,
+        descriptionTranslations: translation?.translations ?? null,
       })
       .returning();
 

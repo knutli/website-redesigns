@@ -14,29 +14,54 @@ Bilingual NB / EN from day one.
 ### Public / unauthenticated
 - Landing / activity feed (read-only preview, prompt to sign in for actions)
 - Browse with filters, sort, search
+- **Discover → Collections** — curated collections surface as their own
+  browseable layer, not just personal profile decoration
+- **Discover → Wanted** — public list of active Wanted posts
 - Public user profiles + their public collections + public locker
-- Public auction / listing pages (view bids, time left, photos)
+- Public auction / listing pages (view bids, time left, photos, view count,
+  public Annons-ID, days-since-published, share, "Suspected fake?" flag)
 - About / FAQ / terms / shipping policy
 
 ### Authenticated user
 - Profile customisation (avatar, banner, bio, favourite club, location, socials)
-- Locker — **public by default**, user can toggle individual jerseys or the
-  whole locker to private in settings
+- **Verified Collector badge** — trust signal applied by admin based on
+  criteria TBD (e.g. a minimum number of positive reviews, hand-verified
+  identity, verified high-value authenticated collections). Shown next to
+  the handle on listings, profiles, messages, bids. Nominations can be
+  automated once we have the signal, but the final flip is a manual admin
+  action in the dashboard
+- Locker — **public by default**, toggle individual jerseys or the whole
+  locker to private in settings
 - Collections (curated sets users can pin to their profile)
-- Wishlist (saved auctions/listings, alerts)
+- **Wishlist** — saved auctions and fixed listings, with outbid /
+  ending-soon / price-drop alerts. _Private to the user._
+- **Wanted** — separate from Wishlist. Public "I'm looking for X" posts
+  (club, era, size, max price, notes + optional reference photos). Each
+  Wanted has its own detail page and feeds matching-listing alerts to the
+  author plus a badge on matching new listings ("3 people want this").
+  Users get a personal **My Wanted** view; Wanted posts also surface in
+  Discover
 - Upload jersey flow (single upload → choose: Locker / Auction / Buy Now)
 - Bidding on auctions (with proxy bid / max bid)
-- Buy now checkout
-- Buying dashboard: My Bids, To Pay, Paid (with shipment tracking)
+- Buy-now checkout
+- **My Bids** — active bidding activity (outbid, leading, won-unpaid)
+- **My Purchases** — `To pay` / `Ongoing` / `Completed`. "Ongoing" merges
+  won-auctions-awaiting-delivery with buy-now-awaiting-delivery
 - Selling dashboard: active listings, awaiting payment, ready to ship,
-  sold history, payouts
-- Direct messages (buyer ↔ seller, optional general DMs)
+  sold history, payouts, **pseudo-wallet** (Stripe Connect balance)
+- Saved payment methods (card / Vipps / Klarna) for **fast checkout** +
+  auto-charge on auction win
+- Direct messages (buyer ↔ seller, plus **Ask-a-question** threads
+  pinned to listings — M5)
 - Notifications (in-app + email + optional push): outbid, auction ending,
-  won, sold, payment received, message, listing approved/rejected
+  won, sold, payment received, message, listing approved/rejected,
+  matching-listing for your Wanted posts, suspected-fake verdict
 - Reviews / ratings after completed transactions
-- Reports (listing, user, message)
+- Reports (listing, user, message) + prominent **Suspected fake?** flow
+  distinct from generic Report. Feeds a dedicated admin authenticity queue
 - Settings: account, payment methods, shipping addresses, notification
-  preferences, privacy (locker public / private), language, delete account
+  preferences, privacy (locker public / private), **language + currency**,
+  delete account
 
 ### Live auction mechanics
 - Real-time current price + bid count + bidder pseudonyms
@@ -48,6 +73,24 @@ Bilingual NB / EN from day one.
 - Server-authoritative time + bid validation (prevent client-side cheating)
 - Cannot bid on own listing; must be signed in; account must be in good
   standing (email verified, no active bans)
+- **Browse card for auctions shows both current bid and time remaining.**
+  We deliberately deviate from "countdown only until you open it" — buyers
+  scanning a feed benefit from the number being visible
+
+### Listing detail extras (v1)
+- View counter ("41 views") — cheap social-proof signal
+- Share button (native share sheet on mobile, copy-link fallback)
+- Public Annons-ID (e.g. `7F215554`) for support / moderation reference
+- "Published N days ago"
+- Auto-translated descriptions with a visible "Auto-translated from
+  {lang}" disclaimer — single LLM call at listing save + when the source
+  description changes; cached per target language
+- Cross-sell rail at the bottom — "Other jerseys in size M" /
+  "More from this club". Recommendation by shared attributes (size,
+  club, era)
+- Follow seller + Visit profile CTAs on the listing card
+- Reserve-price indicator chip (auctions only)
+- **Suspected fake?** report CTA — visually distinct from generic report
 
 ### Admin
 - Listing approval queue (auctions + buy-now). Locker uploads bypass.
@@ -57,45 +100,70 @@ Bilingual NB / EN from day one.
   field). Decision is written to `listings.rejected_reason` /
   `approved_by` / `approved_at` and an in-app + email notification fires to
   the seller. Next item loads automatically so the reviewer can stay in flow.
+- **Authenticity queue** — "Suspected fake?" reports feed a separate queue
+  with its own workflow (take down, request more photos, mark verified)
+- **Verified Collector nominations** — review and flip the badge
 - User moderation, ban, shadow-ban
 - Report queue
-- Featured listings / homepage curation
+- Featured listings / homepage curation + Collections curation
 - Refund + dispute tools
-- Basic analytics (DAU, GMV, active auctions)
+- Basic analytics (DAU, GMV, active auctions, Wanted-match conversion)
 
 ---
 
 ## 2. Information architecture
 
 **No bottom nav.** Sidebar on desktop, slide-in drawer (hamburger) on mobile —
-same structure in both:
+same structure in both. A persistent top bar holds quick actions across
+breakpoints.
+
+### Top bar (both desktop and mobile)
+
+```
+[logo]    [search]         ♡  🔔  💬   [avatar/menu]
+                         wish  notif  msgs
+```
+
+On mobile the top bar is sticky and also includes a hamburger on the left
+that opens the drawer.
+
+### Sidebar / drawer
 
 ```
 [Oase]
 ─────────────
   Feed
   Browse
+  DISCOVER
+    Collections
+    Wanted
   Wishlist
   Locker
 ─────────────
   BUYING
     My Bids
-    To Pay
-    Paid
+    Purchases
+      To pay
+      Ongoing
+      Completed
 ─────────────
   SELLING
     Seller Dashboard
     Awaiting Payment
     Ready to Ship
+    Wallet         ← Stripe Connect balance (pseudo-wallet)
 ─────────────
   Settings
 ─────────────
-  [+ Upload Jersey]   (primary CTA, sticky)
+  [+ Create listing]   (primary CTA, sticky)
+  [+ Create wanted]    (secondary CTA, sticky — on mobile drawer these two
+                        sit at the top of the drawer instead)
 ```
 
-On mobile, a sticky top bar holds the hamburger (opens the drawer) and the
-Upload CTA. The drawer mirrors the desktop sidebar exactly so the IA is identical
-across breakpoints.
+The drawer mirrors the desktop sidebar exactly so the IA is identical
+across breakpoints. On mobile drawers the two Create CTAs sit at the top
+of the drawer for thumb reach; on desktop they sit at the bottom of the
+sidebar.
 
 ---
 
@@ -159,31 +227,67 @@ across breakpoints.
 ## 5. Data model (high level)
 
 - `users` (id, auth_id, handle, display_name, avatar, banner, bio, location,
-  country, language, role, status, email_verified_at, created_at)
-- `seller_profiles` (user_id, stripe_account_id, kyc_status, default_shipping_address_id)
+  country, **language, preferred_currency**, role, status,
+  **verified_collector, verified_collector_at**, email_verified_at,
+  **birth_date**, created_at)
+- `seller_profiles` (user_id, vipps_sub, vipps_phone, vipps_name,
+  stripe_account_id, kyc_status, payouts_enabled,
+  default_shipping_address_id)
 - `addresses` (user_id, type, name, street, city, postcode, country)
 - `jerseys` (id, owner_id, title, club, country, season, player, size,
   condition, authenticity, description,
   status: locker|draft|pending|live|sold|archived,
   visibility: public|private, created_at)
 - `jersey_images` (jersey_id, storage_key, width, height, order)
-- `listings` (id, jersey_id, type: auction|fixed, status, start_price,
-  reserve_price, buy_now_price, current_price, end_at, extended_until,
-  approved_by, approved_at, rejected_reason)
+- `listings` (id, jersey_id, **public_id** (e.g. 7F215554), type:
+  auction|fixed, status, start_price, reserve_price, buy_now_price,
+  current_price, end_at, extended_until, approved_by, approved_at,
+  rejected_reason, **view_count**, **description_translations jsonb**
+  {lang → text}, **source_language**)
 - `bids` (id, listing_id, bidder_id, amount, max_amount, placed_at,
   is_proxy, ip_hash)
 - `orders` (id, listing_id, buyer_id, seller_id, gross_amount,
-  platform_fee_amount, seller_net_amount, status: awaiting_payment|paid|
-  shipped|delivered|disputed|refunded, payment_intent_id, shipped_at,
-  tracking_no, carrier)
-- `wishlists` (user_id, listing_id)
-- `collections` (user_id, name, slug, cover_image, is_public)
+  platform_fee_amount, seller_net_amount, shipping_amount, status:
+  awaiting_payment|paid|shipped|delivered|disputed|refunded,
+  payment_intent_id, shipping_address_id, shipped_at, tracking_no,
+  carrier, delivered_at, refunded_at)
+- `saved_payment_methods` (id, user_id, stripe_payment_method_id, type:
+  card|vipps|klarna, brand, last4, is_default, created_at) — powers
+  fast-checkout + auction-win auto-charge
+- `credit_ledger` (id, user_id, delta_minor, reason, order_id?, expires_at?,
+  created_at) — M5 store credit. Non-withdrawable by default; optional
+  withdraw goes through normal Stripe payout flow
+- `wishlists` (user_id, listing_id, created_at)
+- **`wanted`** (id, user_id, title, club, country, season, size_pref,
+  player, description, max_price_minor, status: active|fulfilled|archived,
+  created_at) — reverse-marketplace posts
+- `wanted_image` (id, wanted_id, storage_key, order) — optional
+  reference photos
+- `collections` (id, user_id, name, slug, cover_image, is_public, created_at)
 - `collection_items` (collection_id, jersey_id, position)
-- `follows` (follower_id, followed_id)
-- `messages` (thread_id, sender_id, body, attachments, created_at)
-- `notifications` (user_id, kind, payload, read_at)
-- `reports` (reporter_id, target_type, target_id, reason, status)
+- `follows` (follower_id, followed_id, created_at)
+- `message_thread` (id, order_id?, listing_id?, kind: dm|qa, created_at)
+  — `kind=qa` are Ask-a-question threads pinned to a listing (M5)
+- `thread_participant` (thread_id, user_id, last_read_at)
+- `message` (id, thread_id, sender_id, body, attachments, created_at)
+- **`listing_question`** (M5) — public Q&A variant (question + answer
+  pair, visible on the listing). _Decision pending:_ do we expose
+  questions publicly (Vinted-style) or keep them private DM-backed
+  (Depop-style)? Default: private DM-backed with kind=qa in messages
+- `notifications` (user_id, kind, payload, read_at, created_at)
+- `reports` (id, reporter_id, target_type, target_id, kind: generic|fake,
+  reason, details, status, resolved_by, resolved_at)
 - `audit_log` (actor_id, action, target, before, after, at)
+- **`listing_view`** — simple counter on `listings.view_count` (no
+  separate table for v1). Increment from the server on RSC render,
+  throttled per session to avoid double-count
+
+### Post-launch (not in v1 schema)
+- `offer` / `counter_offer` — Negotiate / offers system, deferred to its
+  own milestone. Needs its own state machine (offer → counter → accept
+  → expiry → link to checkout) and affects listing status
+- `oase_wallet_*` — full top-up wallet via BaaS. Revisit via Swan.io
+  post-launch if users ask for it
 
 ---
 
@@ -215,7 +319,7 @@ Soketi also gives us:
 
 ---
 
-## 7. Payments & fees
+## 7. Payments, fees, and wallet
 
 **Platform fee: 8% of the sale price, total — inclusive of Stripe's processing
 fees.** The seller always receives 92% of the sale price regardless of payment
@@ -239,8 +343,54 @@ Implementation (Stripe Connect, destination charges):
 Supported methods: Cards, **Vipps MobilePay**, Klarna. All enabled as
 Stripe payment methods — no separate integration.
 
-Shipping: **v1 = sellers buy their own labels and paste tracking numbers**
-into the order. **Posten / Bring label API integration is a later milestone.**
+Shipping: **v1 = buyer pays**, added at checkout. Seller buys their own
+label and pastes the tracking number + carrier into the order. Posten /
+Bring label API integration is a later milestone.
+
+### Fast checkout + auction-win auto-charge (v1 — M4)
+
+Buyers save a payment method (card / Vipps / Klarna) via Stripe Setup
+Intents. That token is stored against `saved_payment_methods`. When a
+user wins an auction:
+
+1. Inngest `auction/ended` job finalises the winner.
+2. We create a `PaymentIntent` with `confirm=true` and `off_session=true`
+   against the buyer's default saved method.
+3. On success, the order skips "To pay" and lands in "Ongoing".
+4. On failure (SCA required, expired card, insufficient funds), order
+   falls back to "To pay" and the buyer is notified to pay manually.
+
+This gives buyers the "it just works" UX of a wallet without us
+custodying funds or needing an EMI licence.
+
+### Pseudo-wallet on Selling dashboard (v1 — M4)
+
+The sellers' `Wallet` view surfaces their Stripe connected-account
+balance straight from the Stripe API:
+
+- **Available** — payable out now
+- **Pending** — inside the Stripe escrow window
+- **On hold** — tied up in disputes
+
+Buttons: "Instant payout" (Stripe's fast-payouts feature, if eligible)
+and "Keep for fees" (no-op, just closes the sheet). Nothing lives in our
+database — we're surfacing Stripe's balance, not custodying funds.
+
+### Oase Credits — store credit (v1.5 — M5)
+
+Sellers can earn credits (referrals, return-pack bonuses, admin goodwill)
+that spend on-site. Tracked in `credit_ledger` as signed minor-unit
+deltas. Non-withdrawable by default; optional withdraw-to-bank path
+pushes funds through normal Stripe payout and reduces the ledger.
+Because the credits aren't cash-redeemable on demand, this generally
+sits outside the e-money definition.
+
+### Full top-up wallet (post-launch, maybe)
+
+Real Collecto-style wallet (top up → hold balance → bid → pay) needs a
+BaaS partner or an EMI licence. Ongoing KYC/AML obligations, fund
+segregation, compliance cost. Revisit via **Swan.io** (Nordic-focused
+BaaS) post-launch if users actually ask for it.
 
 ---
 
@@ -260,12 +410,21 @@ into the order. **Posten / Bring label API integration is a later milestone.**
 - Locker CRUD (public by default, no validation)
 - Collections
 
-**M2 — Listings + Browse (week 3)**
+**M2 — Listings + Browse + Discover (week 3)**
 - Upload-jersey wizard (locker / auction / fixed)
-- Admin approval queue
+- **Create Wanted flow** + `/wanted` browse + `/wanted/mine`
+- Admin approval queue (listings) + Verified Collector flip
 - Browse page: filters (club, country, season, size, price, condition,
   type), sort, search (Postgres FTS)
-- Listing detail page
+- **Discover → Collections** surface (public browseable collections)
+- Listing detail page with: public Annons-ID, view counter, share,
+  "Published N days ago", reserve chip, **Suspected fake?** report,
+  cross-sell rail, auto-translated descriptions (LLM call at save time,
+  cached per language)
+- Currency switcher (NOK default; detect locale; later EUR/SEK/DKK when
+  we expand)
+- Top bar: heart / bell / messages icons wired up (counts are best-effort
+  in M2, real counts in M5)
 
 **M3 — Auctions live (week 4)**
 - Soketi on Railway, channel auth
@@ -273,21 +432,28 @@ into the order. **Posten / Bring label API integration is a later milestone.**
 - Anti-snipe + proxy bid + increments
 - Inngest auction-end job
 - Wishlist + outbid notifications
+- **Wanted-match alerts** — when a live listing matches a Wanted post
+  (club + size + era), notify the Wanted author and badge the listing
 - Presence ("X watching")
 
-**M4 — Payments + orders (week 5)**
+**M4 — Payments + orders + pseudo-wallet (week 5)**
 - Stripe Connect Express onboarding
+- **Saved payment methods** (Setup Intents) + fast checkout + auction-win
+  auto-charge
 - Checkout (auction win + buy-now) with Vipps + Klarna + cards
-- Buying / Selling dashboards (To Pay / Paid / Awaiting Payment / Ready to Ship)
+- Buying (**My Bids**) + Purchases (**To pay / Ongoing / Completed**)
+- Selling dashboard + **Wallet** view (Stripe Connect balance)
 - Shipping tracking input (manual carrier + tracking_no)
 - Email notifications (Resend)
 - Refund flow in admin
 
-**M5 — Community (week 6)**
+**M5 — Community + credits (week 6)**
 - Feed (activity ranking, follows, comments, reactions)
 - DMs (Soketi-powered, typing indicators)
+- **Ask-a-question** threads on listings (DM-backed with `kind=qa`)
 - Reviews after completed orders
-- Reports / moderation tools
+- Reports / moderation tools + **authenticity queue** for suspected-fakes
+- **Oase Credits** — store-credit ledger, earn + spend on-site
 
 **M6 — Polish + launch (week 7)**
 - Bilingual NB / EN
@@ -296,6 +462,12 @@ into the order. **Posten / Bring label API integration is a later milestone.**
 - Beta with a slice of the community → iterate
 
 **Later (post-launch):**
+- **Negotiate / offers** — buyer offer + seller counter flow on
+  buy-now (and on auctions before the first bid). Own milestone — it's
+  a whole sub-state-machine that touches listing status, checkout, and
+  expiry timers
+- **Full top-up wallet** — revisit via Swan.io BaaS if users ask. Needs
+  KYC/AML, fund segregation
 - Posten / Bring label API integration
 - Meilisearch migration once filters get heavy
 - Mobile push notifications (web push first, native app later)
@@ -325,8 +497,20 @@ into the order. **Posten / Bring label API integration is a later milestone.**
 - **Shipping v1:** **buyer pays**, added at checkout. Seller pastes tracking
   number + carrier. Posten / Bring label API integration is a later milestone
 - **Navigation:** sidebar on desktop, slide-in drawer on mobile. **No bottom nav.**
+  Persistent top bar with heart / bell / messages / avatar across breakpoints.
+  Two primary CTAs: **Create listing** and **Create wanted**
+- **Wanted** is a first-class feature, distinct from Wishlist — reverse
+  marketplace, public, with matching-listing alerts
+- **Discover** has its own Collections surface + Wanted surface
+- **Verified Collector** badge, flipped by admin
+- **Language + currency** switch in settings (NOK default)
+- **Payments:** fast-checkout via saved Stripe PMs + auction-win
+  auto-charge. Pseudo-wallet on Selling surfaces Stripe Connect balance.
+  Oase Credits (M5) are store-credit, non-withdrawable by default
+- **Negotiate / offers** — deferred post-launch
 - **Admin review:** two-click approve/reject with scrollable image viewer
-  and canned rejection reasons + free-text
+  and canned rejection reasons + free-text. Separate **authenticity
+  queue** fed by "Suspected fake?" reports
 - **Real-time:** Soketi from day one
 - **Images:** Cloudflare R2 + CF Image Resizing
 - **Hosting:** everything on Railway
@@ -340,6 +524,16 @@ into the order. **Posten / Bring label API integration is a later milestone.**
   as an anti-fraud signal — separate from the age-13 minimum
 - Which EU identity providers to onboard first at expansion (iDIN NL,
   BankID SE, FranceConnect, itsme BE are candidates)
+- **Verified Collector criteria** — draft proposal: ≥ 10 completed sales
+  with ≥ 4.8 rating, identity verified via Vipps, no open reports in 90
+  days. Admin flips manually until we automate
+- **Ask-a-question UX** — default is private DM-backed threads pinned to
+  the listing (Depop-style). Revisit if users want public Q&A (Vinted-style)
+- **Auto-translation provider** — Claude API (likely) or OpenAI. Pick
+  the one with the better price/latency on short bursts; both work.
+  Decided: Claude (we have the SDK + same vendor as the build assistant)
+- **Currencies at launch** — v1 displays NOK everywhere. Currency switch
+  UI ships but only NOK is active until EU expansion flips on EUR + SEK + DKK
 
 ---
 

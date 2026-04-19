@@ -51,7 +51,11 @@ export const orderStatus = pgEnum("order_status", [
 ]);
 export const addressType = pgEnum("address_type", ["shipping", "billing"]);
 export const reportStatus = pgEnum("report_status", ["open", "resolved", "dismissed"]);
+export const reportKind = pgEnum("report_kind", ["generic", "fake"]);
 export const authProvider = pgEnum("auth_provider", ["email", "vipps"]);
+export const wantedStatus = pgEnum("wanted_status", ["active", "fulfilled", "archived"]);
+export const paymentMethodType = pgEnum("payment_method_type", ["card", "vipps", "klarna"]);
+export const threadKind = pgEnum("thread_kind", ["dm", "qa"]);
 
 // ---------------------------------------------------------------------------
 // Better Auth tables (kept close to Better Auth's expected shape so we can
@@ -75,12 +79,16 @@ export const user = pgTable("user", {
   location: text("location"),
   country: text("country").default("NO"),
   language: text("language").default("nb"),
+  preferredCurrency: text("preferred_currency").notNull().default("NOK"),
   role: userRole("role").notNull().default("user"),
   status: userStatus("status").notNull().default("active"),
   lockerPublic: boolean("locker_public").notNull().default(true),
-  birthDate: timestamp("birth_date"), // enforced >= age 13 at signup
+  birthDate: timestamp("birth_date"),
   primaryAuthProvider: authProvider("primary_auth_provider").notNull().default("email"),
   vippsVerifiedAt: timestamp("vipps_verified_at"),
+  verifiedCollector: boolean("verified_collector").notNull().default(false),
+  verifiedCollectorAt: timestamp("verified_collector_at"),
+  verifiedCollectorBy: text("verified_collector_by"),
 });
 
 export const session = pgTable("session", {
@@ -201,12 +209,14 @@ export const listing = pgTable(
   "listing",
   {
     id: uuid("id").defaultRandom().primaryKey(),
+    publicId: text("public_id").notNull().unique(), // e.g. 7F215554
     jerseyId: uuid("jersey_id").notNull().references(() => jersey.id, { onDelete: "cascade" }),
     sellerId: text("seller_id").notNull().references(() => user.id),
     type: listingType("type").notNull(),
     status: listingStatus("status").notNull().default("draft"),
 
     // Money stored in minor units (øre)
+    currency: text("currency").notNull().default("NOK"),
     startPrice: bigint("start_price", { mode: "number" }),
     reservePrice: bigint("reserve_price", { mode: "number" }),
     buyNowPrice: bigint("buy_now_price", { mode: "number" }),
@@ -222,6 +232,10 @@ export const listing = pgTable(
     rejectedReason: text("rejected_reason"),
     rejectedBy: text("rejected_by").references(() => user.id),
 
+    viewCount: integer("view_count").notNull().default(0),
+    sourceLanguage: text("source_language"), // language of the seller-written description
+    descriptionTranslations: jsonb("description_translations"), // { [lang]: text }
+
     createdAt: timestamp("created_at").notNull().defaultNow(),
     updatedAt: timestamp("updated_at").notNull().defaultNow(),
   },
@@ -229,6 +243,7 @@ export const listing = pgTable(
     sellerIdx: index("listing_seller_idx").on(t.sellerId),
     statusIdx: index("listing_status_idx").on(t.status),
     endAtIdx: index("listing_end_at_idx").on(t.endAt),
+    publicIdIdx: uniqueIndex("listing_public_id_idx").on(t.publicId),
   }),
 );
 
@@ -337,7 +352,9 @@ export const follow = pgTable(
 
 export const messageThread = pgTable("message_thread", {
   id: uuid("id").defaultRandom().primaryKey(),
+  kind: threadKind("kind").notNull().default("dm"),
   orderId: uuid("order_id").references(() => orderTable.id),
+  listingId: uuid("listing_id").references(() => listing.id), // for kind=qa
   createdAt: timestamp("created_at").notNull().defaultNow(),
 });
 
@@ -382,6 +399,7 @@ export const report = pgTable("report", {
   reporterId: text("reporter_id").notNull().references(() => user.id),
   targetType: text("target_type").notNull(), // listing | user | message
   targetId: text("target_id").notNull(),
+  kind: reportKind("kind").notNull().default("generic"), // "fake" routes to authenticity queue
   reason: text("reason").notNull(),
   details: text("details"),
   status: reportStatus("status").notNull().default("open"),
@@ -389,6 +407,89 @@ export const report = pgTable("report", {
   resolvedAt: timestamp("resolved_at"),
   createdAt: timestamp("created_at").notNull().defaultNow(),
 });
+
+// ---------------------------------------------------------------------------
+// Wanted — reverse marketplace (distinct from wishlist)
+// ---------------------------------------------------------------------------
+
+export const wanted = pgTable(
+  "wanted",
+  {
+    id: uuid("id").defaultRandom().primaryKey(),
+    userId: text("user_id").notNull().references(() => user.id, { onDelete: "cascade" }),
+    title: text("title").notNull(),
+    club: text("club"),
+    country: text("country"),
+    season: text("season"),
+    sizePref: text("size_pref"),
+    player: text("player"),
+    description: text("description"),
+    maxPriceMinor: bigint("max_price_minor", { mode: "number" }),
+    currency: text("currency").notNull().default("NOK"),
+    status: wantedStatus("status").notNull().default("active"),
+    createdAt: timestamp("created_at").notNull().defaultNow(),
+    updatedAt: timestamp("updated_at").notNull().defaultNow(),
+  },
+  (t) => ({
+    userIdx: index("wanted_user_idx").on(t.userId),
+    statusIdx: index("wanted_status_idx").on(t.status),
+    clubIdx: index("wanted_club_idx").on(t.club),
+  }),
+);
+
+export const wantedImage = pgTable(
+  "wanted_image",
+  {
+    id: uuid("id").defaultRandom().primaryKey(),
+    wantedId: uuid("wanted_id").notNull().references(() => wanted.id, { onDelete: "cascade" }),
+    storageKey: text("storage_key").notNull(),
+    order: integer("order").notNull().default(0),
+  },
+  (t) => ({ wantedIdx: index("wanted_image_wanted_idx").on(t.wantedId) }),
+);
+
+// ---------------------------------------------------------------------------
+// Saved payment methods — fast checkout + auction-win auto-charge
+// ---------------------------------------------------------------------------
+
+export const savedPaymentMethod = pgTable(
+  "saved_payment_method",
+  {
+    id: uuid("id").defaultRandom().primaryKey(),
+    userId: text("user_id").notNull().references(() => user.id, { onDelete: "cascade" }),
+    stripePaymentMethodId: text("stripe_payment_method_id").notNull().unique(),
+    type: paymentMethodType("type").notNull(),
+    brand: text("brand"),
+    last4: text("last4"),
+    isDefault: boolean("is_default").notNull().default(false),
+    createdAt: timestamp("created_at").notNull().defaultNow(),
+  },
+  (t) => ({ userIdx: index("saved_payment_method_user_idx").on(t.userId) }),
+);
+
+// ---------------------------------------------------------------------------
+// Oase Credits — store-credit ledger (M5)
+//
+// Non-withdrawable by default. Positive deltas = credits granted
+// (referral, admin goodwill, return-pack bonus). Negative deltas =
+// credits spent (checkout discount) or withdrawn (→ normal Stripe payout).
+// Balance = sum(delta_minor) for a user.
+// ---------------------------------------------------------------------------
+
+export const creditLedger = pgTable(
+  "credit_ledger",
+  {
+    id: uuid("id").defaultRandom().primaryKey(),
+    userId: text("user_id").notNull().references(() => user.id, { onDelete: "cascade" }),
+    deltaMinor: bigint("delta_minor", { mode: "number" }).notNull(),
+    currency: text("currency").notNull().default("NOK"),
+    reason: text("reason").notNull(),
+    orderId: uuid("order_id").references(() => orderTable.id),
+    expiresAt: timestamp("expires_at"),
+    createdAt: timestamp("created_at").notNull().defaultNow(),
+  },
+  (t) => ({ userIdx: index("credit_ledger_user_idx").on(t.userId) }),
+);
 
 export const auditLog = pgTable("audit_log", {
   id: uuid("id").defaultRandom().primaryKey(),
@@ -440,3 +541,6 @@ export type Jersey = typeof jersey.$inferSelect;
 export type Listing = typeof listing.$inferSelect;
 export type Bid = typeof bid.$inferSelect;
 export type Order = typeof orderTable.$inferSelect;
+export type Wanted = typeof wanted.$inferSelect;
+export type SavedPaymentMethod = typeof savedPaymentMethod.$inferSelect;
+export type CreditEntry = typeof creditLedger.$inferSelect;

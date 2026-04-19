@@ -42,6 +42,9 @@ const schema = z.object({
   RESEND_API_KEY: z.string().optional(),
   EMAIL_FROM: z.string().optional(),
 
+  ANTHROPIC_API_KEY: z.string().optional(),
+  TRANSLATION_MODEL: z.string().default("claude-haiku-4-5-20251001"),
+
   SENTRY_DSN: z.string().optional(),
   AXIOM_TOKEN: z.string().optional(),
   AXIOM_DATASET: z.string().optional(),

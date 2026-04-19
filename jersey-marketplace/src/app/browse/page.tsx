@@ -8,6 +8,16 @@ import { publicImageUrl } from "@/lib/storage";
 
 export const dynamic = "force-dynamic";
 
+function timeLeft(end: Date) {
+  const ms = end.getTime() - Date.now();
+  if (ms <= 0) return "ended";
+  const h = Math.floor(ms / 3_600_000);
+  const m = Math.floor((ms % 3_600_000) / 60_000);
+  if (h >= 24) return `${Math.floor(h / 24)}d ${h % 24}h`;
+  if (h > 0) return `${h}h ${m}m`;
+  return `${m}m`;
+}
+
 export default async function BrowsePage() {
   const rows = await db
     .select({
@@ -55,13 +65,19 @@ export default async function BrowsePage() {
                 <CardContent className="p-3">
                   <div className="text-sm font-medium line-clamp-1">{row.title}</div>
                   <div className="text-xs text-muted-foreground line-clamp-1">{row.club}</div>
-                  <div className="mt-1 flex items-center justify-between">
+                  <div className="mt-1 flex items-center justify-between gap-2">
                     <div className="text-sm font-semibold">
                       {row.price ? formatNOK(row.price) : "—"}
                     </div>
-                    <div className="text-[10px] uppercase tracking-wide text-muted-foreground">
-                      {row.type}
-                    </div>
+                    {row.type === "auction" && row.endAt ? (
+                      <span className="rounded-full bg-orange-100 px-1.5 py-0.5 text-[10px] font-medium text-orange-900 dark:bg-orange-950 dark:text-orange-200">
+                        {timeLeft(row.endAt)}
+                      </span>
+                    ) : (
+                      <span className="text-[10px] uppercase tracking-wide text-muted-foreground">
+                        {row.type}
+                      </span>
+                    )}
                   </div>
                 </CardContent>
               </Card>

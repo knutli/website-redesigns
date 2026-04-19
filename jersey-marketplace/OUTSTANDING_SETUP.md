@@ -129,6 +129,16 @@ except where marked.
 
 ---
 
+## Blocking for auto-translated descriptions
+
+### 9b. Anthropic API key (Claude Haiku for listing translation)
+- [ ] Create an Anthropic account and API key at
+      <https://console.anthropic.com>
+- [ ] Add billing (prepay $5 is fine to start — translations are cheap)
+- [ ] Paste the key into `ANTHROPIC_API_KEY` in `.env.local`
+- [ ] (Optional) Override `TRANSLATION_MODEL` if you want something other
+      than `claude-haiku-4-5-20251001` (defaults are fine)
+
 ## Non-blocking but do before launch
 
 ### 10. Domain swap (oase.ai)
