@@ -1,5 +1,14 @@
 import { z } from "zod";
 
+// Treat empty-string env vars as undefined so optional URL/token fields don't
+// fail Zod's url validator when someone leaves a line like `R2_PUBLIC_URL=`
+// in .env.local before they've obtained the real value.
+const emptyToUndef = <T extends z.ZodTypeAny>(s: T) =>
+  z.preprocess((v) => (v === "" ? undefined : v), s);
+
+const optUrl = () => emptyToUndef(z.string().url().optional());
+const optStr = () => emptyToUndef(z.string().optional());
+
 const schema = z.object({
   NODE_ENV: z.enum(["development", "test", "production"]).default("development"),
   NEXT_PUBLIC_APP_URL: z.string().url(),
@@ -11,45 +20,45 @@ const schema = z.object({
   BETTER_AUTH_URL: z.string().url(),
 
   VIPPS_ENV: z.enum(["test", "prod"]).default("test"),
-  VIPPS_CLIENT_ID: z.string().optional(),
-  VIPPS_CLIENT_SECRET: z.string().optional(),
-  VIPPS_SUBSCRIPTION_KEY: z.string().optional(),
-  VIPPS_REDIRECT_URI: z.string().url().optional(),
+  VIPPS_CLIENT_ID: optStr(),
+  VIPPS_CLIENT_SECRET: optStr(),
+  VIPPS_SUBSCRIPTION_KEY: optStr(),
+  VIPPS_REDIRECT_URI: optUrl(),
 
-  STRIPE_SECRET_KEY: z.string().optional(),
-  STRIPE_PUBLISHABLE_KEY: z.string().optional(),
-  STRIPE_WEBHOOK_SECRET: z.string().optional(),
-  NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY: z.string().optional(),
+  STRIPE_SECRET_KEY: optStr(),
+  STRIPE_PUBLISHABLE_KEY: optStr(),
+  STRIPE_WEBHOOK_SECRET: optStr(),
+  NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY: optStr(),
 
-  R2_ACCOUNT_ID: z.string().optional(),
-  R2_ACCESS_KEY_ID: z.string().optional(),
-  R2_SECRET_ACCESS_KEY: z.string().optional(),
-  R2_BUCKET: z.string().optional(),
-  R2_PUBLIC_URL: z.string().url().optional(),
+  R2_ACCOUNT_ID: optStr(),
+  R2_ACCESS_KEY_ID: optStr(),
+  R2_SECRET_ACCESS_KEY: optStr(),
+  R2_BUCKET: optStr(),
+  R2_PUBLIC_URL: optUrl(),
 
-  SOKETI_APP_ID: z.string().optional(),
-  SOKETI_APP_KEY: z.string().optional(),
-  SOKETI_APP_SECRET: z.string().optional(),
-  SOKETI_HOST: z.string().optional(),
-  SOKETI_PORT: z.coerce.number().optional(),
-  NEXT_PUBLIC_SOKETI_KEY: z.string().optional(),
-  NEXT_PUBLIC_SOKETI_HOST: z.string().optional(),
-  NEXT_PUBLIC_SOKETI_PORT: z.coerce.number().optional(),
+  SOKETI_APP_ID: optStr(),
+  SOKETI_APP_KEY: optStr(),
+  SOKETI_APP_SECRET: optStr(),
+  SOKETI_HOST: optStr(),
+  SOKETI_PORT: emptyToUndef(z.coerce.number().optional()),
+  NEXT_PUBLIC_SOKETI_KEY: optStr(),
+  NEXT_PUBLIC_SOKETI_HOST: optStr(),
+  NEXT_PUBLIC_SOKETI_PORT: emptyToUndef(z.coerce.number().optional()),
 
-  INNGEST_EVENT_KEY: z.string().optional(),
-  INNGEST_SIGNING_KEY: z.string().optional(),
+  INNGEST_EVENT_KEY: optStr(),
+  INNGEST_SIGNING_KEY: optStr(),
 
-  RESEND_API_KEY: z.string().optional(),
-  EMAIL_FROM: z.string().optional(),
+  RESEND_API_KEY: optStr(),
+  EMAIL_FROM: optStr(),
 
-  ANTHROPIC_API_KEY: z.string().optional(),
+  ANTHROPIC_API_KEY: optStr(),
   TRANSLATION_MODEL: z.string().default("claude-haiku-4-5-20251001"),
 
-  SENTRY_DSN: z.string().optional(),
-  AXIOM_TOKEN: z.string().optional(),
-  AXIOM_DATASET: z.string().optional(),
-  NEXT_PUBLIC_POSTHOG_KEY: z.string().optional(),
-  NEXT_PUBLIC_POSTHOG_HOST: z.string().optional(),
+  SENTRY_DSN: optStr(),
+  AXIOM_TOKEN: optStr(),
+  AXIOM_DATASET: optStr(),
+  NEXT_PUBLIC_POSTHOG_KEY: optStr(),
+  NEXT_PUBLIC_POSTHOG_HOST: optUrl(),
 });
 
 const parsed = schema.safeParse(process.env);
