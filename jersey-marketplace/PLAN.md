@@ -288,6 +288,13 @@ sidebar.
   → expiry → link to checkout) and affects listing status
 - `oase_wallet_*` — full top-up wallet via BaaS. Revisit via Swan.io
   post-launch if users ask for it
+- **Jersey Artifact Cards** — turn each jersey into a collectible digital
+  card with a rarity grade. AI assigns a rarity score based on
+  era + condition + scarcity + player significance. Rare jerseys get
+  holographic card effects (CSS/WebGL shimmer on tilt/scroll). Cards can
+  be shared as images, shown in profile, and used as social proof in
+  listings. Inspired by Pokémon card aesthetics applied to jersey
+  collecting. Own milestone post-launch
 
 ---
 
