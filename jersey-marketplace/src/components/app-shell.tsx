@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { Heart, Bell, MessageSquare, Search } from "lucide-react";
+import { Bell, MessageSquare, Search } from "lucide-react";
 import Link from "next/link";
 import { SidebarNav } from "@/components/sidebar-nav";
 import { ThemeToggle } from "@/components/theme-toggle";
@@ -17,11 +17,6 @@ function TopBarIcons() {
           <Search className="h-[22px] w-[22px]" />
         </Link>
       </Button>
-      <Button asChild variant="ghost" size="icon" aria-label="Wishlist">
-        <Link href="/wishlist">
-          <Heart className="h-[22px] w-[22px]" />
-        </Link>
-      </Button>
       <Button asChild variant="ghost" size="icon" aria-label="Notifications">
         <Link href="/notifications">
           <Bell className="h-[22px] w-[22px]" />
@@ -32,7 +27,6 @@ function TopBarIcons() {
           <MessageSquare className="h-[22px] w-[22px]" />
         </Link>
       </Button>
-      <ThemeToggle />
     </div>
   );
 }
@@ -55,7 +49,7 @@ export function AppShell({ children }: { children: React.ReactNode }) {
                 <HamburgerIcon />
               </button>
             </SheetTrigger>
-            <SheetContent side="left" className="w-72 p-0">
+            <SheetContent side="left" className="w-full max-w-full p-0">
               <SidebarNav variant="mobile" onNavigate={() => setOpen(false)} />
             </SheetContent>
           </Sheet>
@@ -70,6 +64,7 @@ export function AppShell({ children }: { children: React.ReactNode }) {
         {/* Desktop top bar */}
         <div className="hidden items-center justify-end gap-2 border-b border-border px-6 py-2 md:flex">
           <TopBarIcons />
+          <ThemeToggle />
         </div>
         <div className="mx-auto max-w-6xl p-4 md:p-8">{children}</div>
       </main>
