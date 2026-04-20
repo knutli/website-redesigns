@@ -4,7 +4,7 @@ import { stripe } from "@/lib/stripe";
 import { env } from "@/lib/env";
 import { db } from "@/lib/db";
 import { orderTable, sellerProfile } from "@/lib/db/schema";
-import { eq } from "drizzle-orm";
+import { and, eq, inArray } from "drizzle-orm";
 
 export const runtime = "nodejs";
 
@@ -31,7 +31,7 @@ export async function POST(req: Request) {
         await db
           .update(orderTable)
           .set({ status: "paid", paymentIntentId: pi.id, updatedAt: new Date() })
-          .where(eq(orderTable.id, orderId));
+          .where(and(eq(orderTable.id, orderId), eq(orderTable.status, "awaiting_payment")));
       }
       break;
     }
@@ -55,7 +55,7 @@ export async function POST(req: Request) {
         await db
           .update(orderTable)
           .set({ status: "refunded", refundedAt: new Date(), updatedAt: new Date() })
-          .where(eq(orderTable.paymentIntentId, pi));
+          .where(and(eq(orderTable.paymentIntentId, pi), inArray(orderTable.status, ["paid", "shipped", "delivered"])));
       }
       break;
     }

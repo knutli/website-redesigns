@@ -7,10 +7,11 @@ import { db } from "@/lib/db";
 import { wanted, wantedImage } from "@/lib/db/schema";
 import { r2 } from "@/lib/storage";
 import { env } from "@/lib/env";
+import { validateImages, sanitizeFileName } from "@/lib/upload-validation";
 
 export async function POST(req: Request) {
   const session = await auth.api.getSession({ headers: await headers() });
-  if (!session) return NextResponse.redirect(new URL("/signin?next=/wanted/new", req.url));
+  if (!session) return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
 
   const form = await req.formData();
   const title = String(form.get("title") ?? "").trim();
@@ -31,12 +32,15 @@ export async function POST(req: Request) {
     })
     .returning();
 
-  const files = form.getAll("images").filter((f): f is File => f instanceof File && f.size > 0);
+  const rawFiles = form.getAll("images").filter((f): f is File => f instanceof File && f.size > 0);
+  const { valid: files, error: uploadError } = validateImages(rawFiles);
+  if (uploadError) return NextResponse.json({ error: uploadError }, { status: 400 });
+
   if (r2 && env.R2_BUCKET && files.length) {
     for (let i = 0; i < files.length; i++) {
       const file = files[i];
       const buf = Buffer.from(await file.arrayBuffer());
-      const key = `wanted/${w.id}/${randomUUID()}-${file.name}`;
+      const key = `wanted/${w.id}/${randomUUID()}-${sanitizeFileName(file.name)}`;
       await r2.send(
         new PutObjectCommand({
           Bucket: env.R2_BUCKET,

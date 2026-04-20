@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { signIn, signUp } from "@/lib/auth-client";
+import { safeRedirect } from "@/lib/safe-redirect";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -35,7 +36,7 @@ export function SignInForm({ mode, next }: { mode: "signin" | "signup"; next: st
         const res = await signIn.email({ email, password });
         if (res.error) throw new Error(res.error.message);
       }
-      router.push(next);
+      router.push(safeRedirect(next));
       router.refresh();
     } catch (err) {
       setError(err instanceof Error ? err.message : "Something went wrong");

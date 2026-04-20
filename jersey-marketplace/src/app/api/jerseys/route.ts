@@ -10,10 +10,10 @@ import { env } from "@/lib/env";
 import { PutObjectCommand } from "@aws-sdk/client-s3";
 import { inngest } from "@/lib/inngest";
 import { detectAndTranslate } from "@/lib/translate";
+import { validateImages, sanitizeFileName } from "@/lib/upload-validation";
 
 function newPublicId() {
-  // 8-char uppercase alphanumeric, e.g. "7F215554"
-  return randomBytes(4).toString("hex").toUpperCase();
+  return randomBytes(5).toString("hex").toUpperCase().slice(0, 10);
 }
 
 export async function POST(req: Request) {
@@ -55,12 +55,15 @@ export async function POST(req: Request) {
     .returning();
 
   // Upload images
-  const images = form.getAll("images").filter((f): f is File => f instanceof File);
+  const rawImages = form.getAll("images").filter((f): f is File => f instanceof File && f.size > 0);
+  const { valid: images, error: uploadError } = validateImages(rawImages);
+  if (uploadError) return NextResponse.json({ error: uploadError }, { status: 400 });
+
   if (r2 && env.R2_BUCKET) {
     for (let i = 0; i < images.length; i++) {
       const file = images[i];
       const buf = Buffer.from(await file.arrayBuffer());
-      const key = `jerseys/${j.id}/${randomUUID()}-${file.name}`;
+      const key = `jerseys/${j.id}/${randomUUID()}-${sanitizeFileName(file.name)}`;
       await r2.send(
         new PutObjectCommand({
           Bucket: env.R2_BUCKET,

@@ -2,8 +2,8 @@ import { notFound } from "next/navigation";
 import Link from "next/link";
 import { ArrowLeft, Share2, Bookmark } from "lucide-react";
 import { db } from "@/lib/db";
-import { listing, jersey, jerseyImage, user as userTable, bid } from "@/lib/db/schema";
-import { and, count, desc, eq, ne, sql } from "drizzle-orm";
+import { listing, jersey, jerseyImage, user as userTable, bid, review, orderTable } from "@/lib/db/schema";
+import { and, avg, count, desc, eq, ne, sql } from "drizzle-orm";
 import { ImageCarousel } from "@/components/image-carousel";
 import { LiveAuction } from "@/components/live-auction";
 import { SellerCard } from "@/components/seller-card";
@@ -12,6 +12,7 @@ import { VerificationSection } from "@/components/verification-section";
 import { BidHistory } from "@/components/bid-history";
 import { SimilarItems } from "@/components/similar-items";
 import { StickyBottomBar } from "@/components/sticky-bottom-bar";
+import { ReviewList } from "@/components/review-list";
 
 export const dynamic = "force-dynamic";
 
@@ -61,6 +62,8 @@ export default async function ListingPage({ params }: { params: Promise<{ id: st
     .where(eq(listing.id, id));
 
   if (!row) return notFound();
+  const publicStatuses = ["live", "ended", "sold"];
+  if (!publicStatuses.includes(row.status)) return notFound();
 
   db.update(listing)
     .set({ viewCount: sql`${listing.viewCount} + 1` })
@@ -111,6 +114,32 @@ export default async function ListingPage({ params }: { params: Promise<{ id: st
         .orderBy(desc(listing.createdAt))
         .limit(10)
     : [];
+
+  // Seller stats
+  const [sellerStats] = await db
+    .select({ avgRating: avg(review.rating), reviewCount: count() })
+    .from(review)
+    .where(eq(review.revieweeId, row.sellerId));
+
+  const [{ saleCount }] = await db
+    .select({ saleCount: count() })
+    .from(orderTable)
+    .where(and(eq(orderTable.sellerId, row.sellerId), eq(orderTable.status, "delivered")));
+
+  // Seller reviews
+  const sellerReviews = await db
+    .select({
+      rating: review.rating,
+      comment: review.comment,
+      createdAt: review.createdAt,
+      reviewerHandle: userTable.handle,
+      reviewerName: userTable.name,
+    })
+    .from(review)
+    .innerJoin(userTable, eq(userTable.id, review.reviewerId))
+    .where(eq(review.revieweeId, row.sellerId))
+    .orderBy(desc(review.createdAt))
+    .limit(10);
 
   const meta = [
     row.player,
@@ -170,6 +199,8 @@ export default async function ListingPage({ params }: { params: Promise<{ id: st
         handle={row.sellerHandle}
         name={row.sellerName}
         isVerified={row.sellerVerified}
+        rating={sellerStats.avgRating ? Number(sellerStats.avgRating) : undefined}
+        saleCount={saleCount}
       />
 
       {/* Shirt details */}
@@ -220,6 +251,17 @@ export default async function ListingPage({ params }: { params: Promise<{ id: st
           amount: b.amount,
           timestamp: b.placedAt.toISOString(),
           isHighest: i === 0,
+        }))}
+      />
+
+      {/* Seller reviews */}
+      <ReviewList
+        reviews={sellerReviews.map((r) => ({
+          rating: r.rating,
+          comment: r.comment,
+          reviewerHandle: r.reviewerHandle,
+          reviewerName: r.reviewerName,
+          createdAt: r.createdAt.toISOString(),
         }))}
       />
 

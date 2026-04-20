@@ -4,6 +4,7 @@ import { auth, vippsExchangeCode, vippsUserInfo } from "@/lib/auth";
 import { db } from "@/lib/db";
 import { sellerProfile, user as userTable } from "@/lib/db/schema";
 import { eq } from "drizzle-orm";
+import { safeRedirect } from "@/lib/safe-redirect";
 
 export async function GET(req: Request) {
   const url = new URL(req.url);
@@ -11,7 +12,7 @@ export async function GET(req: Request) {
   const state = url.searchParams.get("state");
   const jar = await cookies();
   const expected = jar.get("vipps_state")?.value;
-  const next = jar.get("vipps_next")?.value ?? "/selling";
+  const next = safeRedirect(jar.get("vipps_next")?.value, "/selling");
   if (!code || !state || !expected || state !== expected) {
     return NextResponse.redirect(new URL("/signin?error=vipps_state", req.url));
   }
