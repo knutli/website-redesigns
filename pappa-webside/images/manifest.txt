@@ -1,0 +1,213 @@
+# Image	Size(bytes)	Filename	Source URL
+001	4618	signatur hvit.png	https://images.squarespace-cdn.com/content/v1/5df50f84a345bc32f57e455c/1576432149185-XJGNDGAVJB25M3ZV4790/signatur+hvit.png
+002	3410166	Kontemplasjon - redigert_web.png	https://images.squarespace-cdn.com/content/v1/5df50f84a345bc32f57e455c/39556eb8-4462-433c-a002-e78a762d3ae2/Kontemplasjon+-+redigert_web.png
+003	4101760	Noctürne - redigert_web.png	https://images.squarespace-cdn.com/content/v1/5df50f84a345bc32f57e455c/05c81eda-591b-46c8-a565-ecf0a61dc931/Noct%C3%BCrne+-+redigert_web.png
+004	5552678	Destinasjon Ukjent - redigert2.png	https://images.squarespace-cdn.com/content/v1/5df50f84a345bc32f57e455c/a8ba78f2-30e8-4b3f-ab12-d185387835ff/Destinasjon+Ukjent+-+redigert2.png
+005	4802350	TK-nattdikt_web.png	https://images.squarespace-cdn.com/content/v1/5df50f84a345bc32f57e455c/ba1dad94-9fec-4d86-90c3-e2f455978863/TK-nattdikt_web.png
+006	179941	Triptyk.jpg	https://images.squarespace-cdn.com/content/v1/5df50f84a345bc32f57e455c/1576428849243-1XASDZ3C53KQREIWK5VQ/Triptyk.jpg
+007	181110	Kriger og fugl.jpg	https://images.squarespace-cdn.com/content/v1/5df50f84a345bc32f57e455c/1576429038601-D9R7DPMXXJNEQIHHHKI6/Kriger+og+fugl.jpg
+008	221684	Kronos eter sine barn.jpg	https://images.squarespace-cdn.com/content/v1/5df50f84a345bc32f57e455c/1576429038603-LNYMV3MGWC8RKJYAFZPM/Kronos+eter+sine+barn.jpg
+009	4733606	Blått lemurisk - redigert_web.png	https://images.squarespace-cdn.com/content/v1/5df50f84a345bc32f57e455c/d627aaec-3d47-4409-bb06-5bad3d2c51d9/Bl%C3%A5tt+lemurisk+-+redigert_web.png
+010	696778	DSCF6105 (2).JPG	https://images.squarespace-cdn.com/content/v1/5df50f84a345bc32f57e455c/1610897873031-FPK0G2XU2MC5HZ6Z3PXW/DSCF6105+%282%29.JPG
+011	125048	Gjennom leden.jpg	https://images.squarespace-cdn.com/content/v1/5df50f84a345bc32f57e455c/1610894948914-FQPOJBBN04L7RL8MUPWL/Gjennom+leden.jpg
+012	103910	IMG_0015 1988.jpg	https://images.squarespace-cdn.com/content/v1/5df50f84a345bc32f57e455c/1610895990734-84GYQ1ATG58Y73PFKZAN/IMG_0015+1988.jpg
+013	374814	Sareptas krukke.jpg	https://images.squarespace-cdn.com/content/v1/5df50f84a345bc32f57e455c/1610895992481-7R0PO2HAM4SNLFJU489T/Sareptas+krukke.jpg
+014	3858110	homage - redigert_web.png	https://images.squarespace-cdn.com/content/v1/5df50f84a345bc32f57e455c/e086e3f7-cca2-4214-8c3a-9462639fc38f/homage+-+redigert_web.png
+015	1562224	Puma.png	https://images.squarespace-cdn.com/content/v1/5df50f84a345bc32f57e455c/1610896129174-OLZ8OZLCSXBJJ1TDR9IT/Puma.png
+016	204726	Grand tour II 1986.jpg	https://images.squarespace-cdn.com/content/v1/5df50f84a345bc32f57e455c/1576421132070-HSZMLVLY8QBXO4137OVB/Grand+tour+II+1986.jpg
+017	848524	DSCF6102 (3).JPG	https://images.squarespace-cdn.com/content/v1/5df50f84a345bc32f57e455c/1611255576194-2FG4RTT7LCRWETHGZBXM/DSCF6102+%283%29.JPG
+018	258118	20200409_155101.jpg	https://images.squarespace-cdn.com/content/v1/5df50f84a345bc32f57e455c/1610965458837-FIKN53UZYGNXYEDD2YIB/20200409_155101.jpg
+019	186028	Grand Tour V.jpg	https://images.squarespace-cdn.com/content/v1/5df50f84a345bc32f57e455c/1576421145685-4D4K91HRSW4XF5OQRWEY/Grand+Tour+V.jpg
+020	253688	Grand Tour VI.jpg	https://images.squarespace-cdn.com/content/v1/5df50f84a345bc32f57e455c/1576421164800-XL0WX1B8YEK7G0EIYUAG/Grand+Tour+VI.jpg
+021	3684060	Marslandskap - redigert_web.png	https://images.squarespace-cdn.com/content/v1/5df50f84a345bc32f57e455c/876e2058-a570-4538-aa1d-8d9a7172b17a/Marslandskap+-+redigert_web.png
+022	739064	Atmosfæriske forstyrrelser 1981.jpg	https://images.squarespace-cdn.com/content/v1/5df50f84a345bc32f57e455c/1576421215730-4E1T6JVQ4I7PN5DQWU9A/Atmosf%C3%A6riske+forstyrrelser+1981.jpg
+023	164168	Departure II.jpg	https://images.squarespace-cdn.com/content/v1/5df50f84a345bc32f57e455c/1576421876437-YI4XH0D3Y8U52P9JU7X7/Departure+II.jpg
+024	128324	Landskap II.jpg	https://images.squarespace-cdn.com/content/v1/5df50f84a345bc32f57e455c/1576429867712-2YT9ZRDM7QALA46KNTKJ/Landskap+II.jpg
+025	311424	Rød Titan.jpg	https://images.squarespace-cdn.com/content/v1/5df50f84a345bc32f57e455c/1576429889851-NYO1YEQHP2SFPMQK67R0/R%C3%B8d+Titan.jpg
+026	211844	Budbringer 1986.jpg	https://images.squarespace-cdn.com/content/v1/5df50f84a345bc32f57e455c/1576417801475-HMVPNP5CK3MKCEK95XXT/Budbringer+1986.jpg
+027	134996	Astro Lady.jpg	https://images.squarespace-cdn.com/content/v1/5df50f84a345bc32f57e455c/1576429678402-QURHUBPKC63DA94SE1G8/Astro+Lady.jpg
+028	136096	Kosmisk flue.jpg	https://images.squarespace-cdn.com/content/v1/5df50f84a345bc32f57e455c/1610895699736-H1XHET99ONL3F51L0WSU/Kosmisk+flue.jpg
+029	456054	Grand Tour I.jpg	https://images.squarespace-cdn.com/content/v1/5df50f84a345bc32f57e455c/1576421204664-7JPMVXM8MII26MJ9EG67/Grand+Tour+I.jpg
+030	9763772	ode til kvinna 2 - redigert.png	https://images.squarespace-cdn.com/content/v1/5df50f84a345bc32f57e455c/31652c64-0aac-4ac9-b6e1-0bc8e4fb3f8b/ode+til+kvinna+2+-+redigert.png
+031	414374	kyl1.jpg	https://images.squarespace-cdn.com/content/v1/5df50f84a345bc32f57e455c/1624746043041-J8WHN43R30YZCGEJX689/kyl1.jpg
+032	198628	Rosalill - redigert_web.jpg	https://images.squarespace-cdn.com/content/v1/5df50f84a345bc32f57e455c/1624744911343-BU37Z5YG18QD2NLIUIDR/Rosalill%2B-%2Bredigert_web.jpg
+033	291990	Den store sjøreisen, farge (etsing, koldnål).jpg	https://images.squarespace-cdn.com/content/v1/5df50f84a345bc32f57e455c/1576428277130-XNTTUHHXY6V9KJWSTQO8/Den+store+sj%C3%B8reisen%2C+farge+%28etsing%2C+koldn%C3%A5l%29.jpg
+034	1192844	20200409_132129.jpg	https://images.squarespace-cdn.com/content/v1/5df50f84a345bc32f57e455c/1610879929202-3HLUD5602K6OJ6D2P6M9/20200409_132129.jpg
+035	1200860	20191207_183811.jpg	https://images.squarespace-cdn.com/content/v1/5df50f84a345bc32f57e455c/1624710522858-0M1B21IPXDV736CSYHQZ/20191207_183811.jpg
+036	232434	Sj%C3%B8reisen_SORT - redigert_web.jpg	https://images.squarespace-cdn.com/content/v1/5df50f84a345bc32f57e455c/1624744951027-3R6XL7YS2QU18MCEUNHI/Sj%25C3%25B8reisen_SORT%2B-%2Bredigert_web.jpg
+037	309192	Kontemplasjon II %28elementtrykk%29.jpg	https://images.squarespace-cdn.com/content/v1/5df50f84a345bc32f57e455c/1624710593536-HQQA4Y0TIM97QXGBX2AG/Kontemplasjon%2BII%2B%2528elementtrykk%2529.jpg
+038	5050418	Sort Luciagutt - redigert_web.png	https://images.squarespace-cdn.com/content/v1/5df50f84a345bc32f57e455c/b4728d0d-7265-4e60-aab2-9c51ce3f59a6/Sort+Luciagutt+-+redigert_web.png
+039	352452	Knut Steen - redigert_web.jpg	https://images.squarespace-cdn.com/content/v1/5df50f84a345bc32f57e455c/1624745048678-U4JIZ89ATR4I2N8YX2ZC/Knut%2BSteen%2B-%2Bredigert_web.jpg
+040	220474	Lek - redigert_web.jpg	https://images.squarespace-cdn.com/content/v1/5df50f84a345bc32f57e455c/1624745003345-FZ9MCCG7CNPPN3JKH78E/Lek%2B-%2Bredigert_web.jpg
+041	44930	Kongsbergknekken.jpg	https://images.squarespace-cdn.com/content/v1/5df50f84a345bc32f57e455c/1615545564896-V0XT2A32IODMTMG8FMH4/Kongsbergknekken.jpg
+042	93798	Helmuth Recknagel.jpg	https://images.squarespace-cdn.com/content/v1/5df50f84a345bc32f57e455c/1576420098667-D9WD8NDC7XG2NKRQLAI1/Helmuth+Recknagel.jpg
+043	90094	Espen B.jpg	https://images.squarespace-cdn.com/content/v1/5df50f84a345bc32f57e455c/1576420096988-T3L6JB3C1Y624Q6EZ2XR/Espen+B.jpg
+044	189706	Flygende Titan.jpg	https://images.squarespace-cdn.com/content/v1/5df50f84a345bc32f57e455c/1576420141365-L8YWKNJGB7AWL05PZPQH/Flygende+Titan.jpg
+045	200032	Hyllest til Anette IIII svart hvitt.jpg	https://images.squarespace-cdn.com/content/v1/5df50f84a345bc32f57e455c/1576420177055-NFQ6NEEIADO1GYTOI7KM/Hyllest+til+Anette+IIII+svart+hvitt.jpg
+046	290088	Toralf Engan - redigert.jpg	https://images.squarespace-cdn.com/content/v1/5df50f84a345bc32f57e455c/1624745258435-VW1G9BJBHBU5RZDPPDM4/Toralf%2BEngan%2B-%2Bredigert.jpg
+047	252842	Hyllest til Anette III svart hvitt.jpg	https://images.squarespace-cdn.com/content/v1/5df50f84a345bc32f57e455c/1576420141140-040048818GZVKP0PT24K/Hyllest+til+Anette+III+svart+hvitt.jpg
+048	285804	Hyllest til Anette III.jpg	https://images.squarespace-cdn.com/content/v1/5df50f84a345bc32f57e455c/1576420182819-29F6UCY47CWQOF7I97MI/Hyllest+til+Anette+III.jpg
+049	149538	Globalisering.jpg	https://images.squarespace-cdn.com/content/v1/5df50f84a345bc32f57e455c/1576420112014-UMFS7ZTY7D0RNZNINHJ6/Globalisering.jpg
+050	255386	Hyllest til Anette IIII.jpg	https://images.squarespace-cdn.com/content/v1/5df50f84a345bc32f57e455c/1576420186382-URC04G2U1FMY2V8WQ469/Hyllest+til+Anette+IIII.jpg
+051	269340	Hyllest til Anette II.jpg	https://images.squarespace-cdn.com/content/v1/5df50f84a345bc32f57e455c/1576420150266-674Z56YZ9SO52O34YG5L/Hyllest+til+Anette+II.jpg
+052	4709474	nattryttere - redigert_web.png	https://images.squarespace-cdn.com/content/v1/5df50f84a345bc32f57e455c/be0cd84b-dbe3-4e6a-999b-2096446c9621/nattryttere+-+redigert_web.png
+053	120878	Hyllest til Thor Sjøfarer.jpg	https://images.squarespace-cdn.com/content/v1/5df50f84a345bc32f57e455c/1610896673619-B3IG82KCH4ZYDSH8X77U/Hyllest+til+Thor+Sj%C3%B8farer.jpg
+054	428532	20210627_223503.jpg	https://images.squarespace-cdn.com/content/v1/5df50f84a345bc32f57e455c/1625004930369-GKBTEB57DVNL762V6IXS/20210627_223503.jpg
+055	347264	Siste kl%C3%B8ver %28blues for en bl%C3%A5 hest%29.jpg	https://images.squarespace-cdn.com/content/v1/5df50f84a345bc32f57e455c/1625004974430-I3DEO6SXS01DP0GS4DV0/Siste%2Bkl%25C3%25B8ver%2B%2528blues%2Bfor%2Ben%2Bbl%25C3%25A5%2Bhest%2529.jpg
+056	2545476	SKOG-INT_1- redigert_web.png	https://images.squarespace-cdn.com/content/v1/5df50f84a345bc32f57e455c/24f6cb77-5ba4-4c04-aadd-f980d0a18534/SKOG-INT_1-+redigert_web.png
+057	2768010	SKOG-INT_2- redigert_web.png	https://images.squarespace-cdn.com/content/v1/5df50f84a345bc32f57e455c/96bcd178-9c11-4d77-8156-f00c86f2778f/SKOG-INT_2-+redigert_web.png
+058	2938034	SKOG-INT_3- redigert_web.png	https://images.squarespace-cdn.com/content/v1/5df50f84a345bc32f57e455c/6c09a060-ef2f-4e4e-947d-27c86a093c00/SKOG-INT_3-+redigert_web.png
+059	216202	IMG_0033.jpg	https://images.squarespace-cdn.com/content/v1/5df50f84a345bc32f57e455c/1610896827783-VLYJVEBHEUNB2WA1LO6K/IMG_0033.jpg
+060	541710	DSCF6100 (2).JPG	https://images.squarespace-cdn.com/content/v1/5df50f84a345bc32f57e455c/1610900385511-M50T00HLZ8RKT7X6NUIF/DSCF6100+%282%29.JPG
+061	5175452	Gevir - redigert_web.png	https://images.squarespace-cdn.com/content/v1/5df50f84a345bc32f57e455c/07072476-546e-4fe4-992f-d51cd6358d30/Gevir+-+redigert_web.png
+062	4505630	Stemningsfragment - redigert_web.png	https://images.squarespace-cdn.com/content/v1/5df50f84a345bc32f57e455c/eee8aa5a-a100-4b80-be53-cdeb727c966e/Stemningsfragment+-+redigert_web.png
+063	4703524	Vinterkriger - redigert_web.png	https://images.squarespace-cdn.com/content/v1/5df50f84a345bc32f57e455c/829784c6-fc71-410d-8f5a-b12a9d8f534b/Vinterkriger+-+redigert_web.png
+064	116572	DSCF6066 (3).JPG	https://images.squarespace-cdn.com/content/v1/5df50f84a345bc32f57e455c/1610899247226-DGF04950O7RPY5L6O8QY/DSCF6066+%283%29.JPG
+065	82484	IMG_00061(1)1.jpg	https://images.squarespace-cdn.com/content/v1/5df50f84a345bc32f57e455c/4a6e04fa-347f-4c6f-80ee-b74423085bfb/IMG_00061%281%291.jpg
+066	1562224	Puma_2.png	https://images.squarespace-cdn.com/content/v1/5df50f84a345bc32f57e455c/1610896644186-81CF10F5O3U27HFUOICX/Puma.png
+067	173226	Mastodont - redigert_web.jpg	https://images.squarespace-cdn.com/content/v1/5df50f84a345bc32f57e455c/1624745733486-8YMW0YC1ML2D97MYMFI6/Mastodont%2B-%2Bredigert_web.jpg
+068	62418	Arabisk vår 2.jfif	https://images.squarespace-cdn.com/content/v1/5df50f84a345bc32f57e455c/1610895465322-4IGYVTQ5T9GT8HC8X68B/Arabisk+v%C3%A5r+2.jfif
+069	298930	DSCF6074 (2).JPG	https://images.squarespace-cdn.com/content/v1/5df50f84a345bc32f57e455c/1610899837516-B5YB6OANFZ312X1DPOVN/DSCF6074+%282%29.JPG
+070	5270830	Duellen - redigert_web.png	https://images.squarespace-cdn.com/content/v1/5df50f84a345bc32f57e455c/de4df1ed-4d2f-4dbf-b676-e4797abc3ae4/Duellen+-+redigert_web.png
+071	281128	Svalene%2Bkommer%2B-%2Bredigert_web.jpg	https://images.squarespace-cdn.com/content/v1/5df50f84a345bc32f57e455c/1624745846846-L01QIGYNPBSX10ZBYWP2/Svalene%252Bkommer%252B-%252Bredigert_web.jpg
+072	203300	Virgo.jpg	https://images.squarespace-cdn.com/content/v1/5df50f84a345bc32f57e455c/1576420843813-CN16HZ8JZ6VXKTHE4FFG/Virgo.jpg
+073	180254	Aries.jpg	https://images.squarespace-cdn.com/content/v1/5df50f84a345bc32f57e455c/1576420614559-U9NHWS69W0WEPR6SNHJS/Aries.jpg
+074	145186	Taurus.jpg	https://images.squarespace-cdn.com/content/v1/5df50f84a345bc32f57e455c/1576420808377-UJRLDCECNM8FF9J5M517/Taurus.jpg
+075	136536	Scorpio.jpg	https://images.squarespace-cdn.com/content/v1/5df50f84a345bc32f57e455c/1576420823083-UCK5J0OKHO42SO87QB4P/Scorpio.jpg
+076	215898	Sagittarius.jpg	https://images.squarespace-cdn.com/content/v1/5df50f84a345bc32f57e455c/1576420829105-GBJMHSAQEJWC0RAQHMBO/Sagittarius.jpg
+077	171730	Pisces.jpg	https://images.squarespace-cdn.com/content/v1/5df50f84a345bc32f57e455c/1576420825250-RR3ZHYSCWIKRI6NTHHZ1/Pisces.jpg
+078	201724	Libra.jpg	https://images.squarespace-cdn.com/content/v1/5df50f84a345bc32f57e455c/1576420824347-TWGLF2JMR0VIQHK2AP64/Libra.jpg
+079	189042	Leo.jpg	https://images.squarespace-cdn.com/content/v1/5df50f84a345bc32f57e455c/1576420733671-ZBN4JLEVWUE02SJUD9LJ/Leo.jpg
+080	125088	Cancer.jpg	https://images.squarespace-cdn.com/content/v1/5df50f84a345bc32f57e455c/1576420597770-85S4F3HCHLVARFP357KV/Cancer.jpg
+081	156302	Capricorn_01.jpg	https://images.squarespace-cdn.com/content/v1/5df50f84a345bc32f57e455c/1576420605931-KD6XBCAUY5GE2TLGFM66/Capricorn_01.jpg
+082	179568	Gemini.jpg	https://images.squarespace-cdn.com/content/v1/5df50f84a345bc32f57e455c/1576420613099-GLZOPRT9PUGTWDVPYGPJ/Gemini.jpg
+083	195464	Aquarius.jpg	https://images.squarespace-cdn.com/content/v1/5df50f84a345bc32f57e455c/1576420616919-05IAXCJ9QLHF3LF5K1J6/Aquarius.jpg
+084	522418	Cinque Terre III.jpg	https://images.squarespace-cdn.com/content/v1/5df50f84a345bc32f57e455c/1576423430849-E1M9AC9VQNZISJEEBZOY/Cinque+Terre+III.jpg
+085	641118	Trond_Knutli_05.jpg	https://images.squarespace-cdn.com/content/v1/5df50f84a345bc32f57e455c/1611257135328-RY5FECI9U35PSUCT61UK/Trond_Knutli_05.jpg
+086	970982	Trond_Knutli_06.jpg	https://images.squarespace-cdn.com/content/v1/5df50f84a345bc32f57e455c/1576423495796-UU8C98530G5ADAT869QC/Trond_Knutli_06.jpg
+087	788076	Trond_Knutli_08.jpg	https://images.squarespace-cdn.com/content/v1/5df50f84a345bc32f57e455c/1611257362456-HZIPHQZU1YRBGQ3G6UDE/Trond_Knutli_08.jpg
+088	359784	Trond_Knutli_11.jpg	https://images.squarespace-cdn.com/content/v1/5df50f84a345bc32f57e455c/1576427863413-0ZQBRTKSR4DRMSEGG0XB/Trond_Knutli_11.jpg
+089	1392676	Trond_Knutli_16 (2).jpg	https://images.squarespace-cdn.com/content/v1/5df50f84a345bc32f57e455c/1576423548119-Y1VNCZ32F7LU68QCKS17/Trond_Knutli_16+%282%29.jpg
+090	492226	Carrara I.png	https://images.squarespace-cdn.com/content/v1/5df50f84a345bc32f57e455c/1576428733574-G80N6GXZRSOKXNHR7T7I/Carrara+I.png
+091	412138	DSCF6067 (2).JPG	https://images.squarespace-cdn.com/content/v1/5df50f84a345bc32f57e455c/1610899424932-F540ATG3I00PM4TQE2TK/DSCF6067+%282%29.JPG
+092	96240	Dystopi.jpg	https://images.squarespace-cdn.com/content/v1/5df50f84a345bc32f57e455c/1576429527894-V22ST02VFRPDCTHFIWQU/Dystopi.jpg
+093	482600	IMG_0037.jpg	https://images.squarespace-cdn.com/content/v1/5df50f84a345bc32f57e455c/1576429597918-EQS7OXT090R13X9TXFV9/IMG_0037.jpg
+094	268514	IMG_0040.jpg	https://images.squarespace-cdn.com/content/v1/5df50f84a345bc32f57e455c/1576429548390-U6FL0X9Y14NV5EVCUPRN/IMG_0040.jpg
+095	3896812	Saigon - redigert_web.png	https://images.squarespace-cdn.com/content/v1/5df50f84a345bc32f57e455c/39b08169-6c03-4719-b979-93dbd7125abc/Saigon+-+redigert_web.png
+096	202050	Norse Petroleum 1977.jpg	https://images.squarespace-cdn.com/content/v1/5df50f84a345bc32f57e455c/1576429562450-6VNDKFDM0BKANYSET42D/Norse+Petroleum+1977.jpg
+097	3858110	homage - redigert_web_2.png	https://images.squarespace-cdn.com/content/v1/5df50f84a345bc32f57e455c/e6c597f1-5778-4da1-8b07-dbb11c4d8360/homage+-+redigert_web.png
+098	4709474	nattryttere - redigert_web_2.png	https://images.squarespace-cdn.com/content/v1/5df50f84a345bc32f57e455c/2f3fdd9e-8e21-44a4-8df0-5cdb1774a653/nattryttere+-+redigert_web.png
+099	112716	Outsider 1979.jpg	https://images.squarespace-cdn.com/content/v1/5df50f84a345bc32f57e455c/1576429562549-6DJIDFG2MF3S7GJGAX77/Outsider+1979.jpg
+100	140864	Outsider II 1980.jpg	https://images.squarespace-cdn.com/content/v1/5df50f84a345bc32f57e455c/1576429590976-O9GQDCWIBR2P7A0RJZP1/Outsider+II+1980.jpg
+101	183678	Reitgjerdet II 1980.jpg	https://images.squarespace-cdn.com/content/v1/5df50f84a345bc32f57e455c/1576429593862-CGPOWI942MVE0C01OAHQ/Reitgjerdet+II+1980.jpg
+102	179432	Uten tittel 1983.jpg	https://images.squarespace-cdn.com/content/v1/5df50f84a345bc32f57e455c/1576429613093-OCE6PC217KMHPLDOI31A/Uten+tittel+1983.jpg
+103	131716	Bravo I og II.jpg	https://images.squarespace-cdn.com/content/v1/5df50f84a345bc32f57e455c/1576429679082-BSO2LIS6IIRA5SP7QNTO/Bravo+I+og+II.jpg
+104	4956928	Reitgjerdet - redigert_web.png	https://images.squarespace-cdn.com/content/v1/5df50f84a345bc32f57e455c/031e25a0-6fe6-49e4-8306-3ddd276a1d71/Reitgjerdet+-+redigert_web.png
+105	71842	IMG_000811.jpg	https://images.squarespace-cdn.com/content/v1/5df50f84a345bc32f57e455c/68dc162a-e0f9-4963-9dff-bdadcd63e12f/IMG_000811.jpg
+106	110700	Byråkratens drømmereise.jpg	https://images.squarespace-cdn.com/content/v1/5df50f84a345bc32f57e455c/1576429541862-C94ML477S475W5F0KQHV/Byr%C3%A5kratens+dr%C3%B8mmereise.jpg
+107	642312	20210622_165021.jpg	https://images.squarespace-cdn.com/content/v1/5df50f84a345bc32f57e455c/1624717236845-N2PJ57UDWX6ABHJ7KF79/20210622_165021.jpg
+108	526412	20210627_223503 (2).jpg	https://images.squarespace-cdn.com/content/v1/5df50f84a345bc32f57e455c/1625005192466-2QF56YT2ZJ6FW6A8XEK6/20210627_223503+%282%29.jpg
+109	439698	Siste kløver (blues for en blå hest) (2).jpg	https://images.squarespace-cdn.com/content/v1/5df50f84a345bc32f57e455c/1625005452857-YDVA85AID3WLBZO00JCX/Siste+kl%C3%B8ver+%28blues+for+en+bl%C3%A5+hest%29+%282%29.jpg
+110	1292776	20210626_164957v2.jpg	https://images.squarespace-cdn.com/content/v1/5df50f84a345bc32f57e455c/09ed1d14-5653-49f2-9fd4-366445daec53/20210626_164957v2.jpg
+111	161326	20210626_163647v2.jpg	https://images.squarespace-cdn.com/content/v1/5df50f84a345bc32f57e455c/5157843a-87ce-44aa-a64c-88468a3fad40/20210626_163647v2.jpg
+112	734358	20210626_170111v2.jpg	https://images.squarespace-cdn.com/content/v1/5df50f84a345bc32f57e455c/b31d0871-4637-43c5-8165-ec93bcf4c9d2/20210626_170111v2.jpg
+113	336246	20210626_172256v2.jpg	https://images.squarespace-cdn.com/content/v1/5df50f84a345bc32f57e455c/1625259659979-54WDMYBTNXIBQDGYQZ1S/20210626_172256v2.jpg
+114	995686	20210626_165222v2.jpg	https://images.squarespace-cdn.com/content/v1/5df50f84a345bc32f57e455c/29577d31-c4c1-4182-8c58-610e0bd0ecfc/20210626_165222v2.jpg
+115	4505630	Stemningsfragment - redigert_web_2.png	https://images.squarespace-cdn.com/content/v1/5df50f84a345bc32f57e455c/1625260042293-1ZUWOQMBO7USUK1OQBCS/Stemningsfragment+-+redigert_web.png
+116	437140	DSCF6144 (2).JPG	https://images.squarespace-cdn.com/content/v1/5df50f84a345bc32f57e455c/01bfc350-0b1b-4ba8-9db2-91676fa2dc2b/DSCF6144+%282%29.JPG
+117	1562224	Puma_3.png	https://images.squarespace-cdn.com/content/v1/5df50f84a345bc32f57e455c/1610900764959-904IWDDLHWC2U37NJDOM/Puma.png
+118	512902	DSCF6080 (3).JPG	https://images.squarespace-cdn.com/content/v1/5df50f84a345bc32f57e455c/94fcef7f-b0e3-4466-a448-e2a96741002d/DSCF6080+%283%29.JPG
+119	696778	DSCF6105 (2)_2.JPG	https://images.squarespace-cdn.com/content/v1/5df50f84a345bc32f57e455c/1610900800652-2NLKNPU9X67UNJSMNS28/DSCF6105+%282%29.JPG
+120	116572	DSCF6066 (3)_2.JPG	https://images.squarespace-cdn.com/content/v1/5df50f84a345bc32f57e455c/1610900733985-KNHEREQJ56997XXYZ9T8/DSCF6066+%283%29.JPG
+121	5050418	Sort Luciagutt - redigert_web_2.png	https://images.squarespace-cdn.com/content/v1/5df50f84a345bc32f57e455c/aaadf002-c96f-4a3d-83c1-1442d9cb2168/Sort+Luciagutt+-+redigert_web.png
+122	228730	DSCF6145.jpg	https://images.squarespace-cdn.com/content/v1/5df50f84a345bc32f57e455c/1610897541533-I4LXWT541ZMIO7B5V2QJ/DSCF6145.jpg
+123	430	favicon.ico	https://images.squarespace-cdn.com/content/v1/5df50f84a345bc32f57e455c/1577726211469-5P5VEUAM4MR7NN571M38/favicon.ico
+124	4703524	Vinterkriger - redigert_web_2.png	https://images.squarespace-cdn.com/content/v1/5df50f84a345bc32f57e455c/1625260820789-QV5AM2XPPCXCEFZTMBP2/Vinterkriger+-+redigert_web.png
+125	336246	20210626_172256v2_2.jpg	https://images.squarespace-cdn.com/content/v1/5df50f84a345bc32f57e455c/1625259573819-ZV50ZTL5AYGQF556A4RH/20210626_172256v2.jpg
+126	439698	Siste kløver (blues for en blå hest) (2)_2.jpg	https://images.squarespace-cdn.com/content/v1/5df50f84a345bc32f57e455c/1625005441675-2KRCNFIR0IIQ61E5QCUB/Siste+kl%C3%B8ver+%28blues+for+en+bl%C3%A5+hest%29+%282%29.jpg
+127	526412	20210627_223503 (2)_2.jpg	https://images.squarespace-cdn.com/content/v1/5df50f84a345bc32f57e455c/1625005189734-ZMMPD0GKTEYCU87EUCHQ/20210627_223503+%282%29.jpg
+128	4709474	nattryttere - redigert_web_3.png	https://images.squarespace-cdn.com/content/v1/5df50f84a345bc32f57e455c/1624793694738-MUN54NACET9NF70LMT13/nattryttere+-+redigert_web.png
+129	3858110	homage - redigert_web_3.png	https://images.squarespace-cdn.com/content/v1/5df50f84a345bc32f57e455c/1624793557134-3C8RMCFB5K7XMYD8WOXI/homage+-+redigert_web.png
+130	995686	20210626_165222v2_2.jpg	https://images.squarespace-cdn.com/content/v1/5df50f84a345bc32f57e455c/1624722256855-9QBSJOVXJB291T46BKGH/20210626_165222v2.jpg
+131	995686	20210626_165222v2_3.jpg	https://images.squarespace-cdn.com/content/v1/5df50f84a345bc32f57e455c/1624722260459-CAGHDG20NMDFZR441GEF/20210626_165222v2.jpg
+132	734358	20210626_170111v2_2.jpg	https://images.squarespace-cdn.com/content/v1/5df50f84a345bc32f57e455c/1624720516944-88HZTWDO7B3XGLJXN2SJ/20210626_170111v2.jpg
+133	734358	20210626_170111v2_3.jpg	https://images.squarespace-cdn.com/content/v1/5df50f84a345bc32f57e455c/1624720519345-K5PM4II73TWF31KOY2EW/20210626_170111v2.jpg
+134	1292776	20210626_164957v2_2.jpg	https://images.squarespace-cdn.com/content/v1/5df50f84a345bc32f57e455c/1624719807440-EUWXBYD5V18JS1G79FOJ/20210626_164957v2.jpg
+135	1292776	20210626_164957v2_3.jpg	https://images.squarespace-cdn.com/content/v1/5df50f84a345bc32f57e455c/1624719810595-KGS4EBV4D87TC7WP7CF7/20210626_164957v2.jpg
+136	161326	20210626_163647v2_2.jpg	https://images.squarespace-cdn.com/content/v1/5df50f84a345bc32f57e455c/1624718980129-A7ADT78G5R8AKYP7RGFZ/20210626_163647v2.jpg
+137	161326	20210626_163647v2_3.jpg	https://images.squarespace-cdn.com/content/v1/5df50f84a345bc32f57e455c/1624718994657-QISSHRQ5YYO4KYHQ13PU/20210626_163647v2.jpg
+138	598294	20210622_165021_2.jpg	https://images.squarespace-cdn.com/content/v1/5df50f84a345bc32f57e455c/1624717558966-3U0P6V7FQHP8S84TNTRE/20210622_165021.jpg
+139	9763772	ode til kvinna 2 - redigert_2.png	https://images.squarespace-cdn.com/content/v1/5df50f84a345bc32f57e455c/1624746442952-QNJTRKLKKJMEPDV8GXBJ/ode+til+kvinna+2+-+redigert.png
+140	5050418	Sort Luciagutt - redigert_web_3.png	https://images.squarespace-cdn.com/content/v1/5df50f84a345bc32f57e455c/1624746957894-8O3BBE5ZK2N7L18UWU0C/Sort+Luciagutt+-+redigert_web.png
+141	5050418	Sort Luciagutt - redigert_web_4.png	https://images.squarespace-cdn.com/content/v1/5df50f84a345bc32f57e455c/1624746961970-YEZT31EZAFDRDTJ74JAH/Sort+Luciagutt+-+redigert_web.png
+142	3856914	Lek - redigert_web.png	https://images.squarespace-cdn.com/content/v1/5df50f84a345bc32f57e455c/1624747310519-S514CCO71RGF0KTCU4F6/Lek+-+redigert_web.png
+143	85418	Den store sjøreisen.jpg	https://images.squarespace-cdn.com/content/v1/5df50f84a345bc32f57e455c/1621876356643-OZXXMNEQPHP534WNIM15/Den+store+sj%C3%B8reisen.jpg
+144	3702938	Rosalill - redigert_web.png	https://images.squarespace-cdn.com/content/v1/5df50f84a345bc32f57e455c/1624746800120-5S2U6AMRB9HTOE04DB67/Rosalill+-+redigert_web.png
+145	3702938	Rosalill - redigert_web_2.png	https://images.squarespace-cdn.com/content/v1/5df50f84a345bc32f57e455c/1624746841125-OTNBMP7WMO1WLLYI1P2R/Rosalill+-+redigert_web.png
+146	83948	Triptyk_2.jpg	https://images.squarespace-cdn.com/content/v1/5df50f84a345bc32f57e455c/1621874737630-QYKX1U7IN1930BQ7127L/Triptyk.jpg
+147	63920	Astro Lady_2.jpg	https://images.squarespace-cdn.com/content/v1/5df50f84a345bc32f57e455c/1621874337941-1ZQOYVELC9NS8T6T9ZRP/Astro+Lady.jpg
+148	205372	Budbringer.jpg	https://images.squarespace-cdn.com/content/v1/5df50f84a345bc32f57e455c/1621874278801-Y27W4S832ITYGSNMHABE/Budbringer.jpg
+149	18096	Grand tour 4.jpg	https://images.squarespace-cdn.com/content/v1/5df50f84a345bc32f57e455c/1621874129816-RWVELA3EIC7W2ZYMWW0X/Grand+tour+4.jpg
+150	740232	Atmosfæriske forstyrrelser 1981_2.jpg	https://images.squarespace-cdn.com/content/v1/5df50f84a345bc32f57e455c/1621873927722-UVWNT6PGCMWHMJPXNSLC/Atmosf%C3%A6riske+forstyrrelser+1981.jpg
+151	116572	DSCF6066 (3)_3.JPG	https://images.squarespace-cdn.com/content/v1/5df50f84a345bc32f57e455c/1615499140107-JJYU24GAGA1ZJ6IYUQTH/DSCF6066+%283%29.JPG
+152	116572	DSCF6066 (3)_4.JPG	https://images.squarespace-cdn.com/content/v1/5df50f84a345bc32f57e455c/1615499159118-CU9G0ATZ9KVA1O069M0M/DSCF6066+%283%29.JPG
+153	85418	Den store sjøreisen_2.jpg	https://images.squarespace-cdn.com/content/v1/5df50f84a345bc32f57e455c/1615498928292-Z4NAVCHW8T4ML3U5D3K1/Den+store+sj%C3%B8reisen.jpg
+154	85418	Den store sjøreisen_3.jpg	https://images.squarespace-cdn.com/content/v1/5df50f84a345bc32f57e455c/1615498931271-98WWFLPIJY5U0JEVSTUP/Den+store+sj%C3%B8reisen.jpg
+155	5552678	Destinasjon Ukjent - redigert2_2.png	https://images.squarespace-cdn.com/content/v1/5df50f84a345bc32f57e455c/1624747438587-PJYP17EES6FU3Z1641IR/Destinasjon+Ukjent+-+redigert2.png
+156	77106	Destinasjon ukjent.jfif	https://images.squarespace-cdn.com/content/v1/5df50f84a345bc32f57e455c/1615498887995-S27RSB79GCA42PDG74LZ/Destinasjon+ukjent.jfif
+157	4101760	Noctürne - redigert_web_2.png	https://images.squarespace-cdn.com/content/v1/5df50f84a345bc32f57e455c/1624747495508-26DPVS6ZAGBX8YVZD7TE/Noct%C3%BCrne+-+redigert_web.png
+158	4101760	Noctürne - redigert_web_3.png	https://images.squarespace-cdn.com/content/v1/5df50f84a345bc32f57e455c/1624747492067-4M3NNDEL66AB867TFCTT/Noct%C3%BCrne+-+redigert_web.png
+159	194128	Flygende Titan_2.jpg	https://images.squarespace-cdn.com/content/v1/5df50f84a345bc32f57e455c/1615498601063-V7YEUTUTTAP701ORFR4A/Flygende+Titan.jpg
+160	194128	Flygende Titan_3.jpg	https://images.squarespace-cdn.com/content/v1/5df50f84a345bc32f57e455c/1615498604335-H6XALP3H0MIFGZDBXNA9/Flygende+Titan.jpg
+161	153956	Globalisering_2.jpg	https://images.squarespace-cdn.com/content/v1/5df50f84a345bc32f57e455c/1615498516300-76FT3EZ8LFSCA66PWFYM/Globalisering.jpg
+162	153956	Globalisering_3.jpg	https://images.squarespace-cdn.com/content/v1/5df50f84a345bc32f57e455c/1615498520743-91M8P323OL1YPRHAHGQG/Globalisering.jpg
+163	207722	Virgo_2.jpg	https://images.squarespace-cdn.com/content/v1/5df50f84a345bc32f57e455c/1615498375117-J6NB8H5ZFKH9AALDBQ0N/Virgo.jpg
+164	149602	Taurus_2.jpg	https://images.squarespace-cdn.com/content/v1/5df50f84a345bc32f57e455c/1615498255466-T7CJB5YEDYMFZ3PAEIDQ/Taurus.jpg
+165	140958	Scorpio_2.jpg	https://images.squarespace-cdn.com/content/v1/5df50f84a345bc32f57e455c/1615497789238-GDWZ5CWUDQN2ELV4UIKV/Scorpio.jpg
+166	220320	Sagittarius_2.jpg	https://images.squarespace-cdn.com/content/v1/5df50f84a345bc32f57e455c/1615497704721-DZLP15G6GZYZTJ4PKATM/Sagittarius.jpg
+167	176152	Pisces_2.jpg	https://images.squarespace-cdn.com/content/v1/5df50f84a345bc32f57e455c/1615497591895-YJ306297JGRUZUSDMOTC/Pisces.jpg
+168	206146	Libra_2.jpg	https://images.squarespace-cdn.com/content/v1/5df50f84a345bc32f57e455c/1615497477336-GJKEIJ90PF8J1I06MFGV/Libra.jpg
+169	193464	Leo_2.jpg	https://images.squarespace-cdn.com/content/v1/5df50f84a345bc32f57e455c/1615497396999-KO416D78AZUP3T29MCJ9/Leo.jpg
+170	183990	Gemini_2.jpg	https://images.squarespace-cdn.com/content/v1/5df50f84a345bc32f57e455c/1615496938027-BIDP21QIEZXAQFWY8GGE/Gemini.jpg
+171	259660	Hyllest til Anette IIII_2.jpg	https://images.squarespace-cdn.com/content/v1/5df50f84a345bc32f57e455c/1615458532652-X05VAD37NKW6Q058XDBE/Hyllest+til+Anette+IIII.jpg
+172	290226	Hyllest til Anette III_2.jpg	https://images.squarespace-cdn.com/content/v1/5df50f84a345bc32f57e455c/1615458310043-ATBLTLD3YRHJBXZWYLGP/Hyllest+til+Anette+III.jpg
+173	290226	Hyllest til Anette III_3.jpg	https://images.squarespace-cdn.com/content/v1/5df50f84a345bc32f57e455c/1615458434215-Q17PRCSDG1FGGAHOMOXJ/Hyllest+til+Anette+III.jpg
+174	273762	Hyllest til Anette II_2.jpg	https://images.squarespace-cdn.com/content/v1/5df50f84a345bc32f57e455c/1615458100695-LI3Q12MEFN3G8AXL2PO3/Hyllest+til+Anette+II.jpg
+175	273762	Hyllest til Anette II_3.jpg	https://images.squarespace-cdn.com/content/v1/5df50f84a345bc32f57e455c/1615458258916-30LUOG12143755EIZNBY/Hyllest+til+Anette+II.jpg
+176	1562224	Ut av lyset, inn i mørket.png	https://images.squarespace-cdn.com/content/v1/5df50f84a345bc32f57e455c/1613235869865-726FXS1A3792P5SMD98A/Ut+av+lyset%2C+inn+i+m%C3%B8rket.png
+177	1562224	Ut av lyset, inn i mørket_2.png	https://images.squarespace-cdn.com/content/v1/5df50f84a345bc32f57e455c/1613235927007-WSC4X82V7UOD3AJ6M36F/Ut+av+lyset%2C+inn+i+m%C3%B8rket.png
+178	3410166	Kontemplasjon - redigert_web_2.png	https://images.squarespace-cdn.com/content/v1/5df50f84a345bc32f57e455c/1624747572365-T5P544X2NM39XP4ZWHQT/Kontemplasjon+-+redigert_web.png
+179	4802350	TK-nattdikt_web_2.png	https://images.squarespace-cdn.com/content/v1/5df50f84a345bc32f57e455c/1624747675423-LIZ589WAL53VFMMUCC39/TK-nattdikt_web.png
+180	305290	Rød titan.jpg	https://images.squarespace-cdn.com/content/v1/5df50f84a345bc32f57e455c/1613235165780-NAMA7C6DXYZNT81NMRW0/R%C3%B8d+titan.jpg
+181	305290	Rød titan_2.jpg	https://images.squarespace-cdn.com/content/v1/5df50f84a345bc32f57e455c/1613235209428-FDT7Z062VG4LTEMTIEWI/R%C3%B8d+titan.jpg
+182	198798	Grand tour 3.png	https://images.squarespace-cdn.com/content/v1/5df50f84a345bc32f57e455c/1613235060954-3481JBK7B1WRUETB9PPO/Grand+tour+3.png
+183	198798	Grand tour 3_2.png	https://images.squarespace-cdn.com/content/v1/5df50f84a345bc32f57e455c/1613235101459-O258V09WA5PPE1L3OL7R/Grand+tour+3.png
+184	80248	Grand tour 2.jpg	https://images.squarespace-cdn.com/content/v1/5df50f84a345bc32f57e455c/1613234868155-YXUYFGS8NA52L704B8PZ/Grand+tour+2.jpg
+185	80248	Grand tour 2_2.jpg	https://images.squarespace-cdn.com/content/v1/5df50f84a345bc32f57e455c/1613234923753-H8PC3E92H6FHBTZTU7N2/Grand+tour+2.jpg
+186	195780	Grand tour 1.jpg	https://images.squarespace-cdn.com/content/v1/5df50f84a345bc32f57e455c/1613234740021-MJ3IPREG5G3C8I6J5IM9/Grand+tour+1.jpg
+187	195780	Grand tour 1_2.jpg	https://images.squarespace-cdn.com/content/v1/5df50f84a345bc32f57e455c/1613234834767-J4V66W6Y7FFJ5YPJIFR3/Grand+tour+1.jpg
+188	160720	Capricorn.jpg	https://images.squarespace-cdn.com/content/v1/5df50f84a345bc32f57e455c/1615498136382-RP26TCA2UYGKGT9V315U/Capricorn.jpg
+189	129510	Cancer_2.jpg	https://images.squarespace-cdn.com/content/v1/5df50f84a345bc32f57e455c/1615498049627-YGIFXKDGR2WQTTAL3DIE/Cancer.jpg
+190	184676	Aries_2.jpg	https://images.squarespace-cdn.com/content/v1/5df50f84a345bc32f57e455c/1615497963858-VPS984WWT7D3Z0UKJIGE/Aries.jpg
+191	199884	Aquarius_2.jpg	https://images.squarespace-cdn.com/content/v1/5df50f84a345bc32f57e455c/1615497903624-ZDWH6RRL7C34UZBXCD48/Aquarius.jpg
+192	4703524	Vinterkriger - redigert_web_3.png	https://images.squarespace-cdn.com/content/v1/5df50f84a345bc32f57e455c/1625260820851-9AW3A31YLE99PJ4E9896/Vinterkriger+-+redigert_web.png
+193	4505630	Stemningsfragment - redigert_web_3.png	https://images.squarespace-cdn.com/content/v1/5df50f84a345bc32f57e455c/1625260045345-9EUPV0REUH0HV9B24TNR/Stemningsfragment+-+redigert_web.png
+194	4709474	nattryttere - redigert_web_4.png	https://images.squarespace-cdn.com/content/v1/5df50f84a345bc32f57e455c/1624793698927-BDLX5H4QE49ESR6QHNHV/nattryttere+-+redigert_web.png
+195	3858110	homage - redigert_web_4.png	https://images.squarespace-cdn.com/content/v1/5df50f84a345bc32f57e455c/1624793599069-08OF8CADS57W3FQIMHB8/homage+-+redigert_web.png
+196	871626	20210622_165021v2.jpg	https://images.squarespace-cdn.com/content/v1/5df50f84a345bc32f57e455c/1624717625231-VNJ1IEX8489CHCR6ATS9/20210622_165021v2.jpg
+197	3856914	Lek - redigert_web_2.png	https://images.squarespace-cdn.com/content/v1/5df50f84a345bc32f57e455c/1624747310494-ERIP6QQ1X81NSICDVSNA/Lek+-+redigert_web.png
+198	33212	Den store sjøreisen2.jpg	https://images.squarespace-cdn.com/content/v1/5df50f84a345bc32f57e455c/1621876739830-YGVZTPDLMX2XM7ITADB5/Den+store+sj%C3%B8reisen2.jpg
+199	207722	Virgo_3.jpg	https://images.squarespace-cdn.com/content/v1/5df50f84a345bc32f57e455c/1615498380299-4EMJJGNE5XUF8OK0NSBJ/Virgo.jpg
+200	149602	Taurus_3.jpg	https://images.squarespace-cdn.com/content/v1/5df50f84a345bc32f57e455c/1615498256989-7F4VH4SN7QWR0CO69SGL/Taurus.jpg
+201	140958	Scorpio_3.jpg	https://images.squarespace-cdn.com/content/v1/5df50f84a345bc32f57e455c/1615497795850-XXYOV3Y4K8NZ8VE9UZDZ/Scorpio.jpg
+202	220320	Sagittarius_3.jpg	https://images.squarespace-cdn.com/content/v1/5df50f84a345bc32f57e455c/1615497710650-I3CFHNBZ2JNOUG8ZVXTH/Sagittarius.jpg
+203	176152	Pisces_3.jpg	https://images.squarespace-cdn.com/content/v1/5df50f84a345bc32f57e455c/1615497614063-1OCMV7Z921KKVUH5AB2Q/Pisces.jpg
+204	206146	Libra_3.jpg	https://images.squarespace-cdn.com/content/v1/5df50f84a345bc32f57e455c/1615497548952-UH1XI4IW5K1X6V5FG8BW/Libra.jpg
+205	204454	Hyllest til Anette IIII svart hvitt_2.jpg	https://images.squarespace-cdn.com/content/v1/5df50f84a345bc32f57e455c/1615458514828-FJIIQ43YVF7NEP62VD62/Hyllest+til+Anette+IIII+svart+hvitt.jpg
+206	257264	Hyllest til Anette III svart hvitt_2.jpg	https://images.squarespace-cdn.com/content/v1/5df50f84a345bc32f57e455c/1615458409460-ARAR85Q8F480WLALPIYG/Hyllest+til+Anette+III+svart+hvitt.jpg
+207	3410166	Kontemplasjon - redigert_web_3.png	https://images.squarespace-cdn.com/content/v1/5df50f84a345bc32f57e455c/1624747575188-5D6RT63L0QGDJL9CHFV7/Kontemplasjon+-+redigert_web.png
+208	4802350	TK-nattdikt_web_3.png	https://images.squarespace-cdn.com/content/v1/5df50f84a345bc32f57e455c/1624747680509-LSF6WS73WFCSNI1GE6CN/TK-nattdikt_web.png
+209	160720	Capricorn_2.jpg	https://images.squarespace-cdn.com/content/v1/5df50f84a345bc32f57e455c/1615498140921-SVKCASVVBYU49L052N7B/Capricorn.jpg
+210	129510	Cancer_3.jpg	https://images.squarespace-cdn.com/content/v1/5df50f84a345bc32f57e455c/1615498054845-GL75BA6LF2OPDJEA18QC/Cancer.jpg
+211	28090	Aries_3.jpg	https://images.squarespace-cdn.com/content/v1/5df50f84a345bc32f57e455c/1613234325181-34R2ZETGSMFRIDOGBCAI/Aries.jpg
+212	199884	Aquarius_3.jpg	https://images.squarespace-cdn.com/content/v1/5df50f84a345bc32f57e455c/1615497909328-9KZL4TVD0CPM8T68KBMG/Aquarius.jpg

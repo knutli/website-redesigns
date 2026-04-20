@@ -1,0 +1,77 @@
+{
+  "$ref": "#/definitions/works",
+  "definitions": {
+    "works": {
+      "type": "object",
+      "properties": {
+        "title": {
+          "type": "string"
+        },
+        "slug": {
+          "type": "string"
+        },
+        "year": {
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "technique": {
+          "type": "string",
+          "default": ""
+        },
+        "dimensions": {
+          "type": "string",
+          "default": ""
+        },
+        "section": {
+          "type": "string",
+          "enum": [
+            "aktuelt",
+            "verker",
+            "arkiv"
+          ]
+        },
+        "availability": {
+          "type": "string",
+          "enum": [
+            "original",
+            "digital",
+            "sold",
+            "wip"
+          ],
+          "default": "digital"
+        },
+        "featured": {
+          "type": "boolean",
+          "default": false
+        },
+        "sortOrder": {
+          "type": "number"
+        },
+        "price": {
+          "type": "string",
+          "default": ""
+        },
+        "image": {
+          "type": "string"
+        },
+        "imageAlt": {
+          "type": "string",
+          "default": ""
+        },
+        "$schema": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "title",
+        "slug",
+        "section",
+        "image"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "$schema": "http://json-schema.org/draft-07/schema#"
+}
