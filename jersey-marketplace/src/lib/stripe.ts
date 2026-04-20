@@ -3,13 +3,15 @@ import { env } from "@/lib/env";
 import { platformFee } from "@/lib/utils";
 
 export const stripe = env.STRIPE_SECRET_KEY
-  ? new Stripe(env.STRIPE_SECRET_KEY, { apiVersion: "2024-09-30.acacia" })
+  ? new Stripe(env.STRIPE_SECRET_KEY)
   : null;
 
 export function requireStripe(): Stripe {
   if (!stripe) throw new Error("Stripe is not configured — see OUTSTANDING_SETUP.md");
   return stripe;
 }
+
+const VIPPS_HEADER = { apiVersion: "2026-03-25.preview;vipps_preview=v1" as any };
 
 export async function createConnectedAccount(opts: {
   email: string;
@@ -45,13 +47,35 @@ export async function createCheckoutPaymentIntent(opts: {
   buyerEmail: string;
 }) {
   const s = requireStripe();
-  return s.paymentIntents.create({
-    amount: opts.grossAmountMinor,
-    currency: opts.currency,
-    application_fee_amount: platformFee(opts.grossAmountMinor),
-    transfer_data: { destination: opts.destinationAccountId },
-    automatic_payment_methods: { enabled: true },
-    receipt_email: opts.buyerEmail,
-    metadata: { orderId: opts.orderId },
-  });
+  return s.paymentIntents.create(
+    {
+      amount: opts.grossAmountMinor,
+      currency: opts.currency,
+      payment_method_types: ["card", "klarna", ...(opts.currency === "nok" ? ["vipps"] : [])],
+      application_fee_amount: platformFee(opts.grossAmountMinor),
+      transfer_data: { destination: opts.destinationAccountId },
+      receipt_email: opts.buyerEmail,
+      metadata: { orderId: opts.orderId },
+    },
+    opts.currency === "nok" ? VIPPS_HEADER : undefined,
+  );
+}
+
+export async function createDirectPaymentIntent(opts: {
+  amountMinor: number;
+  currency: "nok" | "eur";
+  orderId: string;
+  buyerEmail: string;
+}) {
+  const s = requireStripe();
+  return s.paymentIntents.create(
+    {
+      amount: opts.amountMinor,
+      currency: opts.currency,
+      payment_method_types: ["card", "klarna", ...(opts.currency === "nok" ? ["vipps"] : [])],
+      receipt_email: opts.buyerEmail,
+      metadata: { orderId: opts.orderId },
+    },
+    opts.currency === "nok" ? VIPPS_HEADER : undefined,
+  );
 }
