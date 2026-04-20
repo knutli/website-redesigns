@@ -478,6 +478,10 @@ BaaS) post-launch if users actually ask for it.
 - Posten / Bring label API integration
 - Meilisearch migration once filters get heavy
 - Mobile push notifications (web push first, native app later)
+- **Stripe Connect V2 migration** — we're on V1 (`accounts.create({type:'express'})`
+  + snapshot webhooks + custom checkout UI). Migrate to V2 (`v2.core.accounts`
+  + thin events + hosted Checkout Sessions) before going live in production.
+  Not urgent — V1 has a long runway — but cleaner long-term.
 
 ---
 
