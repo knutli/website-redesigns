@@ -10,7 +10,6 @@ export type JerseyAnalysis = {
   player: string | null;
   size: string | null;
   condition: number | null;
-  authenticity: string | null;
   kitType: string | null;
   brand: string | null;
   description: string | null;
@@ -69,8 +68,7 @@ export async function POST(req: Request) {
   "season": "season like 1998/99 or 2023/24",
   "player": "player name and number if visible, e.g. Beckham #7",
   "size": "size if visible on label (S/M/L/XL/XXL)",
-  "condition": condition rating 1-10 integer (10=mint, 7=good, 4=fair, 1=poor),
-  "authenticity": "Original" or "Replica" or null,
+  "condition": condition rating 1-10 integer (10=brand new with tags, 9=brand new no tags, 8=very good, 7=good, 6=ok, 5=usable, 4=poor, 3=very poor, 2=patchwork, 1=barely a jersey),
   "kitType": "Home" or "Away" or "Third" or "Training" or null,
   "brand": "manufacturer e.g. Nike, adidas, Puma",
   "description": "brief 1-2 sentence description of the jersey, noting any notable features, defects, or details visible"

@@ -13,13 +13,26 @@ type Destination = "locker" | "auction" | "fixed";
 
 const KIT_TYPES = ["Home", "Away", "Third", "Training", "Special"] as const;
 
+const CONDITION_LABELS: Record<number, string> = {
+  10: "Brand new with tags",
+  9: "Brand new without tags",
+  8: "Very good condition",
+  7: "Good condition",
+  6: "OK condition",
+  5: "Usable condition",
+  4: "Poor condition",
+  3: "Very poor condition",
+  2: "Patchwork",
+  1: "Is this even a jersey?",
+};
+
 function Suggestion({ value, onAccept }: { value: string | null; onAccept: (v: string) => void }) {
   if (!value) return null;
   return (
     <button
       type="button"
       onClick={() => onAccept(value)}
-      className="mt-1 inline-flex items-center gap-1 rounded-pill border border-green-400/30 bg-green-900/50 px-2.5 py-0.5 text-xs text-green-300 transition-colors hover:bg-green-900"
+      className="mt-1 inline-flex items-center gap-1 rounded-pill bg-green-400 px-2.5 py-0.5 text-xs font-medium text-white transition-colors hover:bg-green-500"
     >
       Suggested: {value}
     </button>
@@ -46,7 +59,6 @@ export function UploadWizard({ userId: _userId }: { userId: string }) {
   const [condition, setCondition] = useState(7);
   const [kitType, setKitType] = useState("");
   const [brand, setBrand] = useState("");
-  const [authenticity, setAuthenticity] = useState("");
   const [description, setDescription] = useState("");
   const [destination, setDestination] = useState<Destination>("locker");
   const [submitting, setSubmitting] = useState(false);
@@ -101,10 +113,9 @@ export function UploadWizard({ userId: _userId }: { userId: string }) {
     fd.set("season", season);
     fd.set("player", player);
     fd.set("size", size);
-    fd.set("condition", `${condition}/10`);
+    fd.set("condition", `${condition}/10 · ${CONDITION_LABELS[condition] ?? ""}`);
     fd.set("kitType", kitType);
     fd.set("brand", brand);
-    fd.set("authenticity", authenticity);
     fd.set("description", description);
     fd.set("destination", destination);
     files.forEach((f) => fd.append("images", f));
@@ -298,7 +309,12 @@ export function UploadWizard({ userId: _userId }: { userId: string }) {
           </div>
 
           <div className="grid gap-2">
-            <Label htmlFor="condition">Condition: {condition}/10</Label>
+            <div className="flex items-baseline justify-between">
+              <Label htmlFor="condition">Condition</Label>
+              <span className="text-sm font-medium text-green-400">
+                {condition}/10 · {CONDITION_LABELS[condition]}
+              </span>
+            </div>
             <input
               id="condition"
               type="range"
@@ -308,37 +324,12 @@ export function UploadWizard({ userId: _userId }: { userId: string }) {
               onChange={(e) => setCondition(Number(e.target.value))}
               className="w-full accent-green-400"
             />
-            <div className="flex justify-between text-[10px] text-text-tertiary">
-              <span>Poor</span>
-              <span>Fair</span>
-              <span>Good</span>
-              <span>Excellent</span>
-              <span>Mint</span>
-            </div>
             {analysis?.condition ? (
-              <Suggestion value={`${analysis.condition}/10`} onAccept={() => setCondition(analysis.condition!)} />
+              <Suggestion
+                value={`${analysis.condition}/10 · ${CONDITION_LABELS[analysis.condition] ?? ""}`}
+                onAccept={() => setCondition(analysis.condition!)}
+              />
             ) : null}
-          </div>
-
-          <div className="grid gap-2">
-            <Label htmlFor="authenticity">Authenticity</Label>
-            <div className="flex gap-2">
-              {["Original", "Replica"].map((a) => (
-                <button
-                  key={a}
-                  type="button"
-                  onClick={() => setAuthenticity(a)}
-                  className={`rounded-pill border px-4 py-1.5 text-xs font-medium transition-colors ${
-                    authenticity === a
-                      ? "border-green-400 bg-green-400 text-white"
-                      : "border-border bg-card text-text-secondary hover:text-foreground"
-                  }`}
-                >
-                  {a}
-                </button>
-              ))}
-            </div>
-            <Suggestion value={analysis?.authenticity ?? null} onAccept={setAuthenticity} />
           </div>
 
           <div className="grid gap-2">
