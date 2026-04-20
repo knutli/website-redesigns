@@ -1,0 +1,1 @@
+- [No image cropping](feedback_no_image_cropping.md) — Never crop images; always show full artwork with object-fit: contain

@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
+  <rect width="32" height="32" fill="#f5f2ee"/>
+  <text x="16" y="22" font-family="Libre Baskerville, Georgia, serif" font-size="20" text-anchor="middle" fill="#2a2520">TK</text>
+  <line x1="6" y1="26" x2="26" y2="26" stroke="#8a6a1a" stroke-width="1"/>
+</svg>

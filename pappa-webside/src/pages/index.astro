@@ -1,0 +1,126 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { siteConfig, sections } from '../data/site';
+import Gallery from '../components/Gallery.jsx';
+import ContactForm from '../components/ContactForm.jsx';
+
+const entries = await getCollection('works');
+const works = entries.map((e) => ({ ...e.data, id: e.id }));
+
+// Pick a hero image: first featured work
+const hero = works.find((w) => w.featured) || works[0];
+
+const totalWorks = works.length;
+---
+<BaseLayout>
+  <!-- ============================== HERO ============================== -->
+  <section class="container hero" aria-labelledby="hero-title">
+    <div class="hero__grid">
+      <div>
+        <div class="hero__label">Portefølje · 1977 — {new Date().getFullYear()}</div>
+        <h1 id="hero-title" class="hero__title">
+          Trond<br/>Knutli<em>.</em>
+        </h1>
+        <dl class="hero__meta">
+          <dt>Tittel</dt>
+          <dd>Grafiker og billedkunstner</dd>
+          <dt>Sted</dt>
+          <dd>{siteConfig.location}</dd>
+          <dt>Aktiv</dt>
+          <dd>{siteConfig.yearsActive}</dd>
+          <dt>Samling</dt>
+          <dd>{totalWorks} verk i katalog</dd>
+        </dl>
+      </div>
+      <figure class="hero__image">
+        <img src={hero.image} alt={hero.imageAlt || hero.title} loading="eager" fetchpriority="high" />
+        <figcaption class="hero__image-caption">
+          {hero.title}
+          <small>{[hero.technique, hero.year].filter(Boolean).join(' · ')}</small>
+        </figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <!-- ============================== GALLERY (aktuelt + verk) ============================== -->
+  <Gallery client:load works={works} sections={sections} />
+
+  <!-- ============================== OM ============================== -->
+  <section id="om" class="section">
+    <div class="container">
+      <header class="section__head">
+        <div class="section__numeral">III</div>
+        <div class="section__titleblock">
+          <h2>Om kunstneren</h2>
+          <p>En levetid i verksted og atelier.</p>
+        </div>
+        <div class="section__count">Bergen, NO</div>
+      </header>
+      <div class="om-grid">
+        <div class="om-bio">
+          {siteConfig.bio.split('\n\n').map((para) => <p>{para}</p>)}
+        </div>
+        <figure class="om-portrait">
+          <img src={siteConfig.portraitImage} alt={`Portrett av ${siteConfig.artistName}`} loading="lazy" />
+          <figcaption class="om-signature">— {siteConfig.artistName}</figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================== KJØP ============================== -->
+  <section id="kjop" class="section">
+    <div class="container">
+      <header class="section__head">
+        <div class="section__numeral">IV</div>
+        <div class="section__titleblock">
+          <h2>Kjøp</h2>
+          <p>Originaler og digitaltrykk</p>
+        </div>
+        <div class="section__count">To kanaler</div>
+      </header>
+
+      <p class="kjop-lede">
+        Originaler er tilgjengelige direkte fra atelieret — ta kontakt for pris og
+        tilgjengelighet. Digitaltrykk kan bestilles gjennom etablerte plattformer:
+      </p>
+
+      <div class="marketplaces">
+        {siteConfig.marketplaces.map((m) => (
+          <a class="marketplace" href={m.url} target="_blank" rel="noopener noreferrer">
+            <div class="marketplace__handle">№ {m.handle}</div>
+            <h3>{m.name}</h3>
+            <p>{m.description}</p>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================== KONTAKT ============================== -->
+  <section id="kontakt" class="section">
+    <div class="container">
+      <header class="section__head">
+        <div class="section__numeral">V</div>
+        <div class="section__titleblock">
+          <h2>Kontakt</h2>
+          <p>Ta kontakt for henvendelser om kjøp, utstilling eller utsmykning.</p>
+        </div>
+        <div class="section__count">{siteConfig.email}</div>
+      </header>
+
+      <div class="kontakt-grid">
+        <dl class="kontakt-info">
+          <dt>E-post</dt>
+          <dd><a href={`mailto:${siteConfig.email}`}>{siteConfig.email}</a></dd>
+          <dt>Atelier</dt>
+          <dd>{siteConfig.location}</dd>
+          <dt>Åpningstider</dt>
+          <dd>Etter avtale</dd>
+        </dl>
+        <ContactForm client:load />
+      </div>
+    </div>
+  </section>
+</BaseLayout>

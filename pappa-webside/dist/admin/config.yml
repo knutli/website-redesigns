@@ -1,0 +1,59 @@
+# DecapCMS configuration
+
+local_backend: true
+
+backend:
+  name: proxy
+  proxy_url: http://localhost:8081/api/v1
+
+media_folder: "public/images/works"
+public_folder: "/images/works"
+
+locale: "nb"
+
+slug:
+  encoding: "ascii"
+  clean_accents: true
+
+collections:
+  - name: "works"
+    label: "Verker"
+    label_singular: "Verk"
+    folder: "src/content/works"
+    create: true
+    slug: "{{slug}}"
+    extension: "md"
+    format: "yaml-frontmatter"
+    sortable_fields: ['title', 'year', 'section']
+    summary: "{{title}} — {{technique}} ({{year}})"
+    view_filters:
+      - { label: "Aktuelt", field: "section", pattern: "aktuelt" }
+      - { label: "Verk",    field: "section", pattern: "verker" }
+    view_groups:
+      - { label: "Seksjon", field: "section" }
+    fields:
+      - { label: "Tittel",        name: "title",        widget: "string" }
+      - { label: "Slug",          name: "slug",         widget: "string", hint: "URL-vennlig navn (små bokstaver, bindestrek)" }
+      - { label: "År",            name: "year",         widget: "number", required: false, value_type: "int", min: 1960, max: 2100 }
+      - { label: "Teknikk",       name: "technique",    widget: "string", required: false }
+      - { label: "Format (cm)",   name: "dimensions",   widget: "string", required: false, hint: "f.eks. 75×105 cm" }
+      - label: "Seksjon"
+        name: "section"
+        widget: "select"
+        options:
+          - { label: "Aktuelt",  value: "aktuelt" }
+          - { label: "Verk",     value: "verker" }
+      - label: "Tilgjengelighet"
+        name: "availability"
+        widget: "select"
+        options:
+          - { label: "Original tilgjengelig", value: "original" }
+          - { label: "Kun digitaltrykk",      value: "digital" }
+          - { label: "Utsolgt",               value: "sold" }
+          - { label: "Under arbeid",          value: "wip" }
+      - { label: "Pris",           name: "price",       widget: "string", required: false, hint: "f.eks. 5 000 kr" }
+      - { label: "Fremhevet?",     name: "featured",    widget: "boolean", default: false, required: false }
+      - { label: "Sorteringsrekkefølge", name: "sortOrder", widget: "number", required: false, value_type: "int" }
+      - { label: "Bilde",       name: "image",    widget: "image" }
+      - { label: "Alt-tekst",   name: "imageAlt", widget: "string", required: false }
+      - { label: "Beskrivelse", name: "body",     widget: "markdown", required: false, hint: "Vises i lightbox under verket" }

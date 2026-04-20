@@ -1,0 +1,71 @@
+---
+import '../styles/global.css';
+import { siteConfig, sections } from '../data/site';
+import MobileNav from '../components/MobileNav.jsx';
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const {
+  title = `${siteConfig.artistName} — ${siteConfig.tagline}`,
+  description = `Portefølje: grafikk og billedkunst av ${siteConfig.artistName}. Koldnål, etsning og særtrykk fra atelieret i Bergen.`,
+} = Astro.props;
+---
+<!doctype html>
+<html lang="nb">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content={description} />
+    <meta name="theme-color" content="#f5f2ee" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <title>{title}</title>
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="nb_NO" />
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="container site-header__inner">
+        <a href="#top" class="site-header__brand" aria-label={siteConfig.artistName}>
+          <span class="site-header__name">{siteConfig.artistName}</span>
+          <span class="site-header__sub">{siteConfig.tagline.toUpperCase()}</span>
+        </a>
+        <nav aria-label="Hovedmeny">
+          <ul class="site-header__nav">
+            {sections.map((s) => (
+              <li><a href={`#${s.id}`}>{s.label}</a></li>
+            ))}
+          </ul>
+        </nav>
+        <button class="site-header__burger" aria-label="Åpne meny" id="burger">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </header>
+
+    <MobileNav client:load sections={sections} />
+
+    <main id="top">
+      <slot />
+    </main>
+
+    <footer class="site-footer">
+      <div class="container site-footer__inner">
+        <div class="site-footer__mark">© {new Date().getFullYear()} {siteConfig.artistName}</div>
+        <div>{siteConfig.location} · <a href={`mailto:${siteConfig.email}`}>{siteConfig.email}</a></div>
+      </div>
+    </footer>
+
+    <script>
+      // Wire the burger to the MobileNav component
+      const burger = document.getElementById('burger');
+      burger?.addEventListener('click', () => {
+        window.dispatchEvent(new CustomEvent('toggle-mobile-nav'));
+      });
+    </script>
+  </body>
+</html>
