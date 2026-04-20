@@ -503,6 +503,26 @@ export const auditLog = pgTable("audit_log", {
 });
 
 // ---------------------------------------------------------------------------
+// Reviews (after completed orders)
+// ---------------------------------------------------------------------------
+
+export const review = pgTable(
+  "review",
+  {
+    id: uuid("id").defaultRandom().primaryKey(),
+    orderId: uuid("order_id").notNull().unique().references(() => orderTable.id),
+    reviewerId: text("reviewer_id").notNull().references(() => user.id),
+    revieweeId: text("reviewee_id").notNull().references(() => user.id),
+    rating: integer("rating").notNull(), // 1-5
+    comment: text("comment"),
+    createdAt: timestamp("created_at").notNull().defaultNow(),
+  },
+  (t) => ({
+    revieweeIdx: index("review_reviewee_idx").on(t.revieweeId),
+  }),
+);
+
+// ---------------------------------------------------------------------------
 // Relations
 // ---------------------------------------------------------------------------
 

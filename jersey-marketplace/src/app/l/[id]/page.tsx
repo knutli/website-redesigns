@@ -5,7 +5,7 @@ import { db } from "@/lib/db";
 import { listing, jersey, jerseyImage, user as userTable, bid } from "@/lib/db/schema";
 import { and, count, desc, eq, ne, sql } from "drizzle-orm";
 import { ImageCarousel } from "@/components/image-carousel";
-import { AuctionBlock } from "@/components/auction-block";
+import { LiveAuction } from "@/components/live-auction";
 import { SellerCard } from "@/components/seller-card";
 import { ShirtDetailsGrid } from "@/components/shirt-details-grid";
 import { VerificationSection } from "@/components/verification-section";
@@ -154,13 +154,13 @@ export default async function ListingPage({ params }: { params: Promise<{ id: st
 
       {/* Auction / Buy Now */}
       <div data-auction-block>
-        <AuctionBlock
+        <LiveAuction
           listingId={row.id}
           type={row.type}
-          currentPrice={row.currentPrice ?? row.startPrice ?? 0}
+          initialPrice={row.currentPrice ?? row.startPrice ?? 0}
           startPrice={row.startPrice ?? undefined}
           endAt={row.endAt}
-          bidCount={bidCount}
+          initialBidCount={bidCount}
           status={isEnded ? "ended" : "live"}
         />
       </div>
