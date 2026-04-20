@@ -7,7 +7,7 @@ export default async function AwaitingPaymentPage() {
   if (!s) redirect("/signin?next=/selling/awaiting-payment");
   return (
     <div className="space-y-4">
-      <h1 className="font-display text-3xl">Awaiting payment</h1>
+      <h1 className="font-display text-lg">Awaiting payment</h1>
       <p className="text-muted-foreground">
         Orders where the buyer has won or committed but hasn't paid yet.
       </p>

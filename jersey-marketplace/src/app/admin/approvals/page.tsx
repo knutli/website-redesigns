@@ -48,7 +48,7 @@ export default async function ApprovalsPage() {
     <div className="space-y-4">
       <header className="flex items-end justify-between">
         <div>
-          <h1 className="font-display text-3xl">Approval queue</h1>
+          <h1 className="font-display text-lg">Approval queue</h1>
           <p className="text-sm text-muted-foreground">
             {items.length} pending · arrow keys scroll images, <kbd>A</kbd> approve, <kbd>R</kbd> reject
           </p>

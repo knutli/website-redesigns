@@ -31,7 +31,7 @@ export default async function WalletPage() {
   if (!profile?.stripeAccountId) {
     return (
       <div className="space-y-4">
-        <h1 className="font-display text-3xl">Wallet</h1>
+        <h1 className="font-display text-lg">Wallet</h1>
         <Card className="border-dashed">
           <CardContent className="p-4 text-sm text-muted-foreground">
             Finish Stripe onboarding to see your balance here.{" "}
@@ -52,7 +52,7 @@ export default async function WalletPage() {
   return (
     <div className="space-y-6">
       <header>
-        <h1 className="font-display text-3xl">Wallet</h1>
+        <h1 className="font-display text-lg">Wallet</h1>
         <p className="text-sm text-muted-foreground">
           Balance from your Stripe Connect account — we don't hold funds, Stripe does.
         </p>

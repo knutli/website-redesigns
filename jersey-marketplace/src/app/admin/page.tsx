@@ -16,7 +16,7 @@ export default async function AdminHome() {
 
   return (
     <div className="space-y-6">
-      <h1 className="font-display text-3xl">Admin</h1>
+      <h1 className="font-display text-lg">Admin</h1>
       <div className="grid gap-4 md:grid-cols-3">
         <Card>
           <CardContent className="p-4">

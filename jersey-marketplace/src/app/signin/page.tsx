@@ -16,7 +16,7 @@ export default async function SignInPage({
   return (
     <div className="mx-auto max-w-md space-y-6">
       <header className="space-y-2 text-center">
-        <h1 className="font-display text-3xl">
+        <h1 className="font-display text-lg">
           {mode === "signup" ? "Create your account" : "Welcome back"}
         </h1>
         <p className="text-sm text-muted-foreground">

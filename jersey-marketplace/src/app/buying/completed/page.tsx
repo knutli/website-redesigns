@@ -32,7 +32,7 @@ export default async function CompletedPage() {
 
   return (
     <div className="space-y-6">
-      <h1 className="font-display text-3xl">Completed</h1>
+      <h1 className="font-display text-lg">Completed</h1>
       <p className="text-sm text-muted-foreground">
         Delivered and refunded orders. Leave a review from the order detail.
       </p>

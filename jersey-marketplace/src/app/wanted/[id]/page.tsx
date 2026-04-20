@@ -69,7 +69,7 @@ export default async function WantedDetailPage({
         <Card>
           <CardContent className="space-y-3 p-4">
             <div className="text-xs uppercase text-muted-foreground">Wanted</div>
-            <h1 className="font-display text-3xl leading-tight">{row.title}</h1>
+            <h1 className="font-display text-lg leading-tight">{row.title}</h1>
             <div className="text-sm text-muted-foreground">
               Posted by{" "}
               <Link className="underline" href={`/u/${row.handle ?? ""}`}>

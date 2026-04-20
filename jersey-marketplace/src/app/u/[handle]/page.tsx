@@ -27,7 +27,7 @@ export default async function ProfilePage({ params }: { params: Promise<{ handle
   return (
     <div className="space-y-6">
       <header className="space-y-1">
-        <h1 className="font-display text-3xl">@{u.handle}</h1>
+        <h1 className="font-display text-lg">@{u.handle}</h1>
         <p className="text-sm text-muted-foreground">
           {u.location ?? null}
           {u.favouriteClub ? ` · ${u.favouriteClub}` : null}

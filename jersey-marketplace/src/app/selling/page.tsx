@@ -35,7 +35,7 @@ export default async function SellerDashboardPage() {
     <div className="space-y-6">
       <header className="flex items-end justify-between">
         <div>
-          <h1 className="font-display text-3xl">Seller dashboard</h1>
+          <h1 className="font-display text-lg">Seller dashboard</h1>
           <p className="text-sm text-muted-foreground">
             8% commission · seller keeps 92% regardless of payment method
           </p>

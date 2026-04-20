@@ -5,6 +5,7 @@ import { desc, eq } from "drizzle-orm";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { formatNOK } from "@/lib/utils";
+import { Plus } from "lucide-react";
 
 export const dynamic = "force-dynamic";
 
@@ -27,40 +28,51 @@ export default async function WantedBrowsePage() {
     .limit(60);
 
   return (
-    <div className="space-y-6">
-      <header className="flex items-end justify-between">
-        <div>
-          <h1 className="font-display text-3xl">Wanted</h1>
-          <p className="text-sm text-muted-foreground">
-            Reverse marketplace — collectors looking for specific jerseys. Have a match? Message the
-            poster or list it.
-          </p>
-        </div>
-        <Button asChild>
-          <Link href="/wanted/new">Post a Wanted</Link>
-        </Button>
-      </header>
+    <div className="space-y-4">
+      <div className="flex items-baseline justify-between">
+        <h1 className="font-display text-lg">Wanted</h1>
+        {rows.length > 0 ? (
+          <Button asChild size="sm">
+            <Link href="/wanted/new">
+              <Plus className="mr-1 h-3.5 w-3.5" />
+              Post
+            </Link>
+          </Button>
+        ) : null}
+      </div>
 
       {rows.length === 0 ? (
-        <div className="rounded-lg border border-dashed p-10 text-center text-muted-foreground">
-          No active Wanted posts yet. Be the first — tell the community what you're hunting.
-        </div>
+        <Link href="/wanted/new" className="block">
+          <div className="flex flex-col items-center gap-3 rounded-lg border-2 border-dashed border-border p-12 text-center transition-colors hover:border-green-400/50 hover:bg-card">
+            <div className="flex h-12 w-12 items-center justify-center rounded-full bg-green-900">
+              <Plus className="h-6 w-6 text-green-300" />
+            </div>
+            <div>
+              <p className="font-semibold text-foreground">Post what you're looking for</p>
+              <p className="mt-1 text-sm text-text-tertiary">
+                Tell the community which jersey you want. Sellers with a match get notified.
+              </p>
+            </div>
+          </div>
+        </Link>
       ) : (
         <div className="grid gap-3 md:grid-cols-2">
           {rows.map((r) => (
             <Link key={r.id} href={`/wanted/${r.id}`}>
-              <Card className="">
+              <Card className="transition-colors hover:bg-card-hover">
                 <CardContent className="p-4">
-                  <div className="font-medium">{r.title}</div>
-                  <div className="text-xs text-muted-foreground">
+                  <div className="font-medium text-foreground">{r.title}</div>
+                  <div className="text-xs text-text-tertiary">
                     {[r.club, r.season, r.sizePref].filter(Boolean).join(" · ")}
                   </div>
                   <div className="mt-2 flex items-center justify-between text-sm">
-                    <span className="text-muted-foreground">
+                    <span className="text-text-secondary">
                       {r.handle ? `@${r.handle}` : r.name}
                     </span>
                     {r.maxPrice ? (
-                      <span className="font-semibold">up to {formatNOK(r.maxPrice)}</span>
+                      <span className="font-semibold tabular-nums text-foreground">
+                        up to {formatNOK(r.maxPrice)}
+                      </span>
                     ) : null}
                   </div>
                 </CardContent>

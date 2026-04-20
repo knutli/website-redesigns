@@ -7,7 +7,7 @@ export default async function MyBidsPage() {
   if (!s) redirect("/signin?next=/buying/bids");
   return (
     <div className="space-y-4">
-      <h1 className="font-display text-3xl">My Bids</h1>
+      <h1 className="font-display text-lg">My Bids</h1>
       <p className="text-muted-foreground">Active bids, outbid alerts, and won auctions will show here.</p>
     </div>
   );

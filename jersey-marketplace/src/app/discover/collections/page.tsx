@@ -24,7 +24,7 @@ export default async function DiscoverCollectionsPage() {
   return (
     <div className="space-y-6">
       <header>
-        <h1 className="font-display text-3xl">Collections</h1>
+        <h1 className="font-display text-lg">Collections</h1>
         <p className="text-sm text-muted-foreground">
           Curated jersey sets by the community. Featured picks rotate weekly.
         </p>

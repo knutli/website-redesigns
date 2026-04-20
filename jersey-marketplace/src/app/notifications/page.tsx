@@ -19,7 +19,7 @@ export default async function NotificationsPage() {
 
   return (
     <div className="space-y-4">
-      <h1 className="font-display text-3xl">Notifications</h1>
+      <h1 className="font-display text-lg">Notifications</h1>
       {rows.length === 0 ? (
         <div className="rounded-lg border border-dashed p-10 text-center text-muted-foreground">
           All caught up.

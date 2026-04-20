@@ -13,7 +13,7 @@ export default async function NewWantedPage() {
   return (
     <div className="mx-auto max-w-2xl space-y-6">
       <header>
-        <h1 className="font-display text-3xl">Post a Wanted</h1>
+        <h1 className="font-display text-lg">Post a Wanted</h1>
         <p className="text-sm text-muted-foreground">
           Tell the community what you're hunting. Sellers with matching jerseys get notified, and
           you'll get a ping when a listing matches your post.

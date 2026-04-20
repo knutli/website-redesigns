@@ -13,7 +13,7 @@ export default async function SettingsPage() {
   return (
     <div className="space-y-6">
       <header>
-        <h1 className="font-display text-3xl">Settings</h1>
+        <h1 className="font-display text-lg">Settings</h1>
         <p className="text-sm text-muted-foreground">Account, identity, privacy, payouts.</p>
       </header>
 

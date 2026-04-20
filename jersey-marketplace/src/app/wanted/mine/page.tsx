@@ -22,7 +22,7 @@ export default async function MyWantedPage() {
     <div className="space-y-6">
       <header className="flex items-end justify-between">
         <div>
-          <h1 className="font-display text-3xl">My Wanted</h1>
+          <h1 className="font-display text-lg">My Wanted</h1>
           <p className="text-sm text-muted-foreground">
             Your posts. Active ones get matching-listing alerts.
           </p>
