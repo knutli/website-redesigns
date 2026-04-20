@@ -241,7 +241,7 @@ export function ApprovalReviewer({ items }: { items: Item[] }) {
           </dl>
 
           {item.description ? (
-            <div className="rounded-xl bg-muted p-3 text-sm">{item.description}</div>
+            <div className="rounded-md bg-muted p-3 text-sm">{item.description}</div>
           ) : null}
 
           {!rejectOpen ? (
@@ -262,7 +262,7 @@ export function ApprovalReviewer({ items }: { items: Item[] }) {
               </Button>
             </div>
           ) : (
-            <div className="space-y-2 rounded-xl border p-3">
+            <div className="space-y-2 rounded-md border p-3">
               <div className="text-sm font-medium">Rejection reason</div>
               <div className="flex flex-wrap gap-2">
                 {REJECTION_REASONS.map((r) => (

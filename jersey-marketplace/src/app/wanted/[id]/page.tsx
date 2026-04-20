@@ -77,7 +77,7 @@ export default async function WantedDetailPage({
               </Link>
             </div>
             {row.maxPrice ? (
-              <div className="rounded-xl bg-muted p-3">
+              <div className="rounded-md bg-muted p-3">
                 <div className="text-xs text-muted-foreground">Budget up to</div>
                 <div className="font-display text-2xl">{formatNOK(row.maxPrice)}</div>
               </div>
@@ -110,7 +110,7 @@ export default async function WantedDetailPage({
               )}
             </dl>
             {row.description ? (
-              <div className="rounded-xl border p-3 text-sm">{row.description}</div>
+              <div className="rounded-md border p-3 text-sm">{row.description}</div>
             ) : null}
             <Button className="w-full" asChild>
               <Link href={`/messages/new?to=${row.userId}&wanted=${row.id}`}>

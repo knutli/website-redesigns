@@ -96,7 +96,7 @@ export function UploadWizard({ userId: _userId }: { userId: string }) {
                 key={d}
                 type="button"
                 onClick={() => setDestination(d)}
-                className={`rounded-xl border p-3 text-left text-sm transition ${
+                className={`rounded-md border p-3 text-left text-sm transition ${
                   destination === d ? "border-primary bg-primary/10" : "hover:bg-accent"
                 }`}
               >

@@ -36,7 +36,7 @@ export function SuspectedFakeButton({ listingId }: { listingId: string }) {
 
   if (sent) {
     return (
-      <div className="rounded-xl border border-destructive/30 bg-destructive/5 p-3 text-sm">
+      <div className="rounded-md border border-destructive/30 bg-destructive/5 p-3 text-sm">
         Thanks — our authenticity team will take a look.
       </div>
     );
