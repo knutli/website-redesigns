@@ -38,7 +38,7 @@ export default async function OngoingPage() {
         Paid orders in transit — both won auctions and buy-now purchases.
       </p>
       {rows.length === 0 ? (
-        <div className="rounded-2xl border border-dashed p-10 text-center text-muted-foreground">
+        <div className="rounded-lg border border-dashed p-10 text-center text-muted-foreground">
           Nothing in transit right now.
         </div>
       ) : (

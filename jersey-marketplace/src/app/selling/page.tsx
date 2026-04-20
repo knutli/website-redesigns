@@ -74,7 +74,7 @@ export default async function SellerDashboardPage() {
       <section className="space-y-2">
         <h2 className="font-medium">Your listings</h2>
         {items.length === 0 ? (
-          <div className="rounded-2xl border border-dashed p-10 text-center text-muted-foreground">
+          <div className="rounded-lg border border-dashed p-10 text-center text-muted-foreground">
             No listings yet.
           </div>
         ) : (

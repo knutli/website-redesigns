@@ -101,7 +101,7 @@ export default async function ListingPage({ params }: { params: Promise<{ id: st
       <div className="grid gap-6 lg:grid-cols-[1fr_380px]">
         <div className="space-y-3">
           {images.map((img) => (
-            <div key={img.storageKey} className="overflow-hidden rounded-2xl bg-muted">
+            <div key={img.storageKey} className="overflow-hidden rounded-lg bg-muted">
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
                 src={publicImageUrl(img.storageKey, { w: 1200, h: 1200, fit: "contain" })}
@@ -216,7 +216,7 @@ export default async function ListingPage({ params }: { params: Promise<{ id: st
           <div className="grid grid-cols-2 gap-3 md:grid-cols-3 lg:grid-cols-6">
             {crossSell.map((c) => (
               <Link key={c.id} href={`/l/${c.id}`}>
-                <Card className="overflow-hidden transition hover:shadow-md">
+                <Card className="overflow-hidden">
                   <div className="aspect-square bg-muted">
                     {c.firstImage ? (
                       // eslint-disable-next-line @next/next/no-img-element

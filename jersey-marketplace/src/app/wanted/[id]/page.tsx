@@ -49,7 +49,7 @@ export default async function WantedDetailPage({
     <div className="grid gap-6 lg:grid-cols-[1fr_380px]">
       <div className="space-y-3">
         {images.map((img) => (
-          <div key={img.id} className="overflow-hidden rounded-2xl bg-muted">
+          <div key={img.id} className="overflow-hidden rounded-lg bg-muted">
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
               src={publicImageUrl(img.storageKey, { w: 1200, h: 1200, fit: "contain" })}
@@ -59,7 +59,7 @@ export default async function WantedDetailPage({
           </div>
         ))}
         {images.length === 0 ? (
-          <div className="rounded-2xl border border-dashed p-10 text-center text-muted-foreground">
+          <div className="rounded-lg border border-dashed p-10 text-center text-muted-foreground">
             No reference photos.
           </div>
         ) : null}

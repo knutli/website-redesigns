@@ -2,58 +2,131 @@
 @tailwind components;
 @tailwind utilities;
 
+/*
+ * Oase Design System — CSS Custom Properties
+ *
+ * Dark mode is the default. Light mode overrides via .light class.
+ * Colors stored as RGB channels (e.g. "17 18 16") so Tailwind's
+ * opacity modifier syntax (bg-primary/50) keeps working.
+ *
+ * To change the palette, edit ONLY this file + tailwind.config.ts.
+ * Every component pulls from these tokens.
+ */
+
 @layer base {
   :root {
-    --background: 40 30% 97%;
-    --foreground: 180 25% 10%;
-    --card: 0 0% 100%;
-    --card-foreground: 180 25% 10%;
-    --popover: 0 0% 100%;
-    --popover-foreground: 180 25% 10%;
-    --primary: 180 60% 28%;
-    --primary-foreground: 40 40% 97%;
-    --secondary: 38 45% 88%;
-    --secondary-foreground: 180 25% 10%;
-    --muted: 38 30% 93%;
-    --muted-foreground: 180 10% 40%;
-    --accent: 38 60% 75%;
-    --accent-foreground: 180 25% 10%;
-    --destructive: 0 72% 45%;
-    --destructive-foreground: 0 0% 100%;
-    --border: 38 20% 85%;
-    --input: 38 20% 85%;
-    --ring: 180 60% 28%;
-    --radius: 1rem;
+    /* ── Backgrounds (warm-green undertone) ── */
+    --background:       17 18 16;       /* #111210 */
+    --background-raised: 26 27 25;      /* #1A1B19 */
+    --card:             31 33 30;       /* #1F211E */
+    --card-hover:       38 40 37;       /* #262825 */
+
+    /* ── Borders ── */
+    --border:           42 44 40;       /* #2A2C28 */
+    --border-light:     51 53 48;       /* #333530 */
+
+    /* ── Text ── */
+    --foreground:       232 230 225;    /* #E8E6E1 */
+    --text-secondary:   155 153 144;    /* #9B9990 */
+    --text-tertiary:    107 105 96;     /* #6B6960 */
+    --text-inverse:     17 18 16;       /* #111210 */
+
+    /* ── Green spectrum (primary) ── */
+    --green-50:         240 245 236;    /* #F0F5EC */
+    --green-100:        212 228 203;    /* #D4E4CB */
+    --green-200:        168 201 154;    /* #A8C99A */
+    --green-300:        123 175 106;    /* #7BAF6A */
+    --green-400:        90 156 71;      /* #5A9C47 */
+    --green-500:        74 131 57;      /* #4A8339 */
+    --green-600:        53 98 40;       /* #356228 */
+    --green-900:        26 46 21;       /* #1A2E15 */
+
+    /* ── Red spectrum (accent — sold, urgency, notifications only) ── */
+    --red-50:           253 240 238;    /* #FDF0EE */
+    --red-100:          245 208 202;    /* #F5D0CA */
+    --red-200:          232 158 145;    /* #E89E91 */
+    --red-300:          217 104 90;     /* #D9685A */
+    --red-400:          204 68 51;      /* #CC4433 */
+    --red-500:          168 54 40;      /* #A83628 */
+    --red-600:          122 39 29;      /* #7A271D */
+    --red-900:          42 18 16;       /* #2A1210 */
+
+    /* ── Sage (verification section only) ── */
+    --sage:             90 122 82;      /* #5A7A52 */
+    --sage-900:         26 46 21;       /* #1A2E15 */
+
+    /* ── Semantic mappings (shadcn bridge) ── */
+    --primary:          var(--green-400);
+    --primary-foreground: 255 255 255;
+    --secondary:        var(--green-900);
+    --secondary-foreground: var(--green-300);
+    --destructive:      var(--red-400);
+    --destructive-foreground: 255 255 255;
+    --muted:            var(--background-raised);
+    --muted-foreground: var(--text-secondary);
+    --accent:           var(--card-hover);
+    --accent-foreground: var(--foreground);
+    --popover:          var(--background-raised);
+    --popover-foreground: var(--foreground);
+    --card-foreground:  var(--foreground);
+    --input:            var(--border);
+    --ring:             var(--green-400);
+
+    /* ── Radii ── */
+    --radius-sm:  6px;
+    --radius-md:  10px;
+    --radius-lg:  16px;
+    --radius-pill: 100px;
   }
 
-  .dark {
-    --background: 180 30% 7%;
-    --foreground: 40 30% 95%;
-    --card: 180 25% 10%;
-    --card-foreground: 40 30% 95%;
-    --popover: 180 25% 10%;
-    --popover-foreground: 40 30% 95%;
-    --primary: 38 55% 70%;
-    --primary-foreground: 180 30% 10%;
-    --secondary: 180 20% 15%;
-    --secondary-foreground: 40 30% 95%;
-    --muted: 180 15% 18%;
-    --muted-foreground: 38 15% 70%;
-    --accent: 180 30% 20%;
-    --accent-foreground: 40 30% 95%;
-    --destructive: 0 70% 55%;
-    --destructive-foreground: 0 0% 100%;
-    --border: 180 15% 20%;
-    --input: 180 15% 20%;
-    --ring: 38 55% 70%;
+  /* ── Light mode overrides ── */
+  .light {
+    --background:       250 249 247;    /* #FAF9F7 */
+    --background-raised: 255 255 255;   /* #FFFFFF */
+    --card:             255 255 255;    /* #FFFFFF */
+    --card-hover:       245 244 241;    /* #F5F4F1 */
+
+    --border:           228 226 220;    /* #E4E2DC */
+    --border-light:     215 213 207;    /* #D7D5CF */
+
+    --foreground:       17 18 16;       /* #111210 */
+    --text-secondary:   107 105 96;     /* #6B6960 */
+    --text-tertiary:    155 153 144;    /* #9B9990 */
+    --text-inverse:     250 249 247;    /* #FAF9F7 */
+
+    --primary:          var(--green-500);
+    --primary-foreground: 255 255 255;
+    --secondary:        var(--green-50);
+    --secondary-foreground: var(--green-600);
+    --destructive:      var(--red-500);
+    --destructive-foreground: 255 255 255;
+    --muted:            245 244 241;    /* #F5F4F1 */
+    --muted-foreground: var(--text-secondary);
+    --accent:           var(--green-50);
+    --accent-foreground: var(--foreground);
+    --popover:          255 255 255;
+    --popover-foreground: var(--foreground);
+    --card-foreground:  var(--foreground);
+    --input:            var(--border);
+    --ring:             var(--green-500);
   }
 }
 
 @layer base {
   * {
-    @apply border-border;
+    border-color: rgb(var(--border));
   }
   body {
-    @apply bg-background text-foreground font-sans antialiased;
+    background-color: rgb(var(--background));
+    color: rgb(var(--foreground));
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+}
+
+@layer utilities {
+  .tabular-nums {
+    font-variant-numeric: tabular-nums;
   }
 }

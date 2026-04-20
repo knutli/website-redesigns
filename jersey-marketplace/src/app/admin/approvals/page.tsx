@@ -56,7 +56,7 @@ export default async function ApprovalsPage() {
       </header>
 
       {items.length === 0 ? (
-        <div className="rounded-2xl border border-dashed p-10 text-center text-muted-foreground">
+        <div className="rounded-lg border border-dashed p-10 text-center text-muted-foreground">
           Queue is empty. Nice.
         </div>
       ) : (

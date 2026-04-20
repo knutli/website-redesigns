@@ -44,14 +44,14 @@ export default async function BrowsePage() {
       </header>
 
       {rows.length === 0 ? (
-        <div className="rounded-2xl border border-dashed p-10 text-center text-muted-foreground">
+        <div className="rounded-lg border border-dashed p-10 text-center text-muted-foreground">
           No live listings yet. Once sellers upload and admin approves, they show up here.
         </div>
       ) : (
         <div className="grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-4">
           {rows.map((row) => (
             <Link key={row.id} href={`/l/${row.id}`}>
-              <Card className="overflow-hidden transition hover:shadow-md">
+              <Card className="overflow-hidden">
                 <div className="aspect-square bg-muted">
                   {row.firstImage ? (
                     // eslint-disable-next-line @next/next/no-img-element

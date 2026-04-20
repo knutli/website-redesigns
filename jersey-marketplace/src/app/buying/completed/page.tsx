@@ -37,7 +37,7 @@ export default async function CompletedPage() {
         Delivered and refunded orders. Leave a review from the order detail.
       </p>
       {rows.length === 0 ? (
-        <div className="rounded-2xl border border-dashed p-10 text-center text-muted-foreground">
+        <div className="rounded-lg border border-dashed p-10 text-center text-muted-foreground">
           Nothing completed yet.
         </div>
       ) : (

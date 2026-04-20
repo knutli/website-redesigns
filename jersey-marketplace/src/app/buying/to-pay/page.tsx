@@ -29,7 +29,7 @@ export default async function ToPayPage() {
     <div className="space-y-6">
       <h1 className="font-display text-3xl">To pay</h1>
       {rows.length === 0 ? (
-        <div className="rounded-2xl border border-dashed p-10 text-center text-muted-foreground">
+        <div className="rounded-lg border border-dashed p-10 text-center text-muted-foreground">
           Nothing to pay — won auctions and checkouts in progress land here.
         </div>
       ) : (

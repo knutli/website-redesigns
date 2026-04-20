@@ -46,7 +46,7 @@ export default async function LockerPage() {
       </header>
 
       {items.length === 0 ? (
-        <div className="rounded-2xl border border-dashed p-10 text-center text-muted-foreground">
+        <div className="rounded-lg border border-dashed p-10 text-center text-muted-foreground">
           Your locker is empty. Upload your first jersey — takes about 30 seconds.
         </div>
       ) : (

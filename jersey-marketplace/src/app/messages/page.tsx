@@ -12,7 +12,7 @@ export default async function MessagesPage() {
       <p className="text-sm text-muted-foreground">
         Direct messages and Ask-a-question threads land here in M5.
       </p>
-      <div className="rounded-2xl border border-dashed p-10 text-center text-muted-foreground">
+      <div className="rounded-lg border border-dashed p-10 text-center text-muted-foreground">
         No threads yet.
       </div>
     </div>

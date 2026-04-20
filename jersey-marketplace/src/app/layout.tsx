@@ -1,11 +1,19 @@
 import type { Metadata } from "next";
-import { Inter, Fraunces } from "next/font/google";
+import { DM_Sans, Young_Serif } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
 import { AppShell } from "@/components/app-shell";
 
-const inter = Inter({ subsets: ["latin"], variable: "--font-sans" });
-const fraunces = Fraunces({ subsets: ["latin"], variable: "--font-display" });
+const dmSans = DM_Sans({
+  subsets: ["latin"],
+  variable: "--font-sans",
+  weight: ["400", "500", "600"],
+});
+const youngSerif = Young_Serif({
+  subsets: ["latin"],
+  variable: "--font-display",
+  weight: "400",
+});
 
 export const metadata: Metadata = {
   title: "Oase — for jersey collectors",
@@ -16,9 +24,9 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="nb" suppressHydrationWarning className={`${inter.variable} ${fraunces.variable}`}>
+    <html lang="nb" suppressHydrationWarning className={`${dmSans.variable} ${youngSerif.variable}`}>
       <body>
-        <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+        <ThemeProvider attribute="class" defaultTheme="dark" enableSystem>
           <AppShell>{children}</AppShell>
         </ThemeProvider>
       </body>

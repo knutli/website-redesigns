@@ -133,7 +133,7 @@ export function ApprovalReviewer({ items }: { items: Item[] }) {
     <div className="grid gap-6 lg:grid-cols-[1fr_360px]">
       {/* Image viewer */}
       <div className="space-y-3">
-        <div className="relative aspect-square overflow-hidden rounded-2xl bg-muted">
+        <div className="relative aspect-square overflow-hidden rounded-lg bg-muted">
           {images[imgIdx] ? (
             // eslint-disable-next-line @next/next/no-img-element
             <img

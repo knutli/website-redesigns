@@ -31,14 +31,14 @@ export default async function DiscoverCollectionsPage() {
       </header>
 
       {rows.length === 0 ? (
-        <div className="rounded-2xl border border-dashed p-10 text-center text-muted-foreground">
+        <div className="rounded-lg border border-dashed p-10 text-center text-muted-foreground">
           No public collections yet. Once users pin collections to their profile, they show up here.
         </div>
       ) : (
         <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
           {rows.map((c) => (
             <Link key={c.id} href={`/u/${c.handle ?? ""}/c/${c.slug}`}>
-              <Card className="transition hover:shadow-md">
+              <Card className="">
                 <CardContent className="p-4">
                   <div className="font-medium">{c.name}</div>
                   <div className="text-xs text-muted-foreground">
