@@ -1,24 +1,28 @@
 import { notFound } from "next/navigation";
+import Link from "next/link";
+import { ArrowLeft, Share2, Bookmark } from "lucide-react";
 import { db } from "@/lib/db";
 import { listing, jersey, jerseyImage, user as userTable, bid } from "@/lib/db/schema";
 import { and, count, desc, eq, ne, sql } from "drizzle-orm";
-import { Card, CardContent } from "@/components/ui/card";
-import { formatNOK } from "@/lib/utils";
-import { publicImageUrl } from "@/lib/storage";
-import { VerifiedBadge } from "@/components/verified-badge";
-import { ShareButton } from "@/components/share-button";
-import { SuspectedFakeButton } from "@/components/suspected-fake-button";
-import { env } from "@/lib/env";
-import Link from "next/link";
+import { ImageCarousel } from "@/components/image-carousel";
+import { AuctionBlock } from "@/components/auction-block";
+import { SellerCard } from "@/components/seller-card";
+import { ShirtDetailsGrid } from "@/components/shirt-details-grid";
+import { VerificationSection } from "@/components/verification-section";
+import { BidHistory } from "@/components/bid-history";
+import { SimilarItems } from "@/components/similar-items";
+import { StickyBottomBar } from "@/components/sticky-bottom-bar";
 
 export const dynamic = "force-dynamic";
 
-function daysSince(d: Date) {
-  const ms = Date.now() - d.getTime();
-  const days = Math.floor(ms / (24 * 60 * 60 * 1000));
-  if (days <= 0) return "today";
-  if (days === 1) return "1 day ago";
-  return `${days} days ago`;
+function timeLeft(end: Date) {
+  const ms = end.getTime() - Date.now();
+  if (ms <= 0) return "ended";
+  const h = Math.floor(ms / 3_600_000);
+  const m = Math.floor((ms % 3_600_000) / 60_000);
+  if (h >= 24) return `${Math.floor(h / 24)}d ${h % 24}h`;
+  if (h > 0) return `${h}h ${m}m`;
+  return `${m}m`;
 }
 
 export default async function ListingPage({ params }: { params: Promise<{ id: string }> }) {
@@ -30,13 +34,12 @@ export default async function ListingPage({ params }: { params: Promise<{ id: st
       status: listing.status,
       type: listing.type,
       currentPrice: listing.currentPrice,
+      startPrice: listing.startPrice,
       buyNowPrice: listing.buyNowPrice,
       reservePrice: listing.reservePrice,
       endAt: listing.endAt,
-      extendedUntil: listing.extendedUntil,
       viewCount: listing.viewCount,
       createdAt: listing.createdAt,
-      descriptionTranslations: listing.descriptionTranslations,
       sourceLanguage: listing.sourceLanguage,
       jerseyId: jersey.id,
       title: jersey.title,
@@ -45,6 +48,7 @@ export default async function ListingPage({ params }: { params: Promise<{ id: st
       player: jersey.player,
       size: jersey.size,
       condition: jersey.condition,
+      authenticity: jersey.authenticity,
       description: jersey.description,
       sellerId: userTable.id,
       sellerHandle: userTable.handle,
@@ -58,7 +62,6 @@ export default async function ListingPage({ params }: { params: Promise<{ id: st
 
   if (!row) return notFound();
 
-  // Fire-and-forget view increment. Cheap, best-effort, no tracking.
   db.update(listing)
     .set({ viewCount: sql`${listing.viewCount} + 1` })
     .where(eq(listing.id, row.id))
@@ -67,178 +70,178 @@ export default async function ListingPage({ params }: { params: Promise<{ id: st
   const images = await db
     .select({ storageKey: jerseyImage.storageKey, order: jerseyImage.order })
     .from(jerseyImage)
-    .where(eq(jerseyImage.jerseyId, row.jerseyId));
+    .where(eq(jerseyImage.jerseyId, row.jerseyId))
+    .orderBy(jerseyImage.order);
 
-  const [{ n }] = await db.select({ n: count() }).from(bid).where(eq(bid.listingId, id));
+  const [{ n: bidCount }] = await db
+    .select({ n: count() })
+    .from(bid)
+    .where(eq(bid.listingId, id));
 
-  // Cross-sell: other jerseys in the same size from different listings
+  const recentBids = await db
+    .select({
+      amount: bid.amount,
+      placedAt: bid.placedAt,
+      bidderHandle: userTable.handle,
+      bidderName: userTable.name,
+    })
+    .from(bid)
+    .innerJoin(userTable, eq(userTable.id, bid.bidderId))
+    .where(eq(bid.listingId, id))
+    .orderBy(desc(bid.amount))
+    .limit(20);
+
   const crossSell = row.size
     ? await db
         .select({
           id: listing.id,
           title: jersey.title,
+          club: jersey.club,
+          player: jersey.player,
+          size: jersey.size,
           price: listing.currentPrice,
+          type: listing.type,
+          endAt: listing.endAt,
           firstImage: jerseyImage.storageKey,
         })
         .from(listing)
         .innerJoin(jersey, eq(jersey.id, listing.jerseyId))
-        .leftJoin(
-          jerseyImage,
-          and(eq(jerseyImage.jerseyId, jersey.id), eq(jerseyImage.order, 0)),
-        )
-        .where(
-          and(eq(listing.status, "live"), eq(jersey.size, row.size), ne(listing.id, row.id)),
-        )
+        .leftJoin(jerseyImage, and(eq(jerseyImage.jerseyId, jersey.id), eq(jerseyImage.order, 0)))
+        .where(and(eq(listing.status, "live"), eq(jersey.size, row.size), ne(listing.id, row.id)))
         .orderBy(desc(listing.createdAt))
-        .limit(6)
+        .limit(10)
     : [];
 
-  const translations =
-    (row.descriptionTranslations as Record<string, string> | null) ?? null;
+  const meta = [
+    row.player,
+    row.size ? `Size ${row.size}` : null,
+    row.condition ? `${row.condition} condition` : null,
+  ]
+    .filter(Boolean)
+    .join(" · ");
+
+  const isEnded = row.status === "ended" || row.status === "sold";
 
   return (
-    <div className="space-y-10">
-      <div className="grid gap-6 lg:grid-cols-[1fr_380px]">
-        <div className="space-y-3">
-          {images.map((img) => (
-            <div key={img.storageKey} className="overflow-hidden rounded-lg bg-muted">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
-                src={publicImageUrl(img.storageKey, { w: 1200, h: 1200, fit: "contain" })}
-                alt={row.title}
-                className="w-full"
-              />
-            </div>
-          ))}
+    <div className="min-h-screen bg-background pb-24">
+      {/* Detail nav */}
+      <nav className="flex items-center justify-between px-4 pb-2.5 pt-2">
+        <Link
+          href="/browse"
+          className="flex items-center gap-1.5 text-sm font-medium text-foreground"
+        >
+          <ArrowLeft className="h-5 w-5" />
+          Back
+        </Link>
+        <div className="flex items-center gap-3">
+          <button type="button" aria-label="Share" className="text-text-secondary">
+            <Share2 className="h-[22px] w-[22px]" />
+          </button>
+          <button type="button" aria-label="Save" className="text-text-secondary">
+            <Bookmark className="h-[22px] w-[22px]" />
+          </button>
         </div>
+      </nav>
 
-        <aside className="space-y-4">
-          <Card>
-            <CardContent className="space-y-3 p-4">
-              <div className="flex items-center justify-between">
-                <div className="text-xs uppercase text-muted-foreground">
-                  {row.type} · Annons-ID {row.publicId}
-                </div>
-                <ShareButton
-                  title={row.title}
-                  url={`${env.NEXT_PUBLIC_APP_URL}/l/${row.id}`}
-                />
-              </div>
-              <h1 className="font-display text-3xl leading-tight">{row.title}</h1>
-              <div className="flex items-center gap-2 text-sm text-muted-foreground">
-                Seller{" "}
-                <Link className="underline" href={`/u/${row.sellerHandle ?? ""}`}>
-                  {row.sellerHandle ? `@${row.sellerHandle}` : row.sellerName}
-                </Link>
-                {row.sellerVerified ? <VerifiedBadge /> : null}
-              </div>
-              <div className="text-xs text-muted-foreground">
-                {row.viewCount} views · Published {daysSince(row.createdAt)}
-              </div>
+      {/* Hero image carousel */}
+      <ImageCarousel images={images} alt={row.title} />
 
-              <div className="rounded-xl bg-muted p-3">
-                <div className="text-xs text-muted-foreground">
-                  {row.type === "auction" ? "Current bid" : "Price"}
-                </div>
-                <div className="font-display text-3xl">
-                  {row.currentPrice ? formatNOK(row.currentPrice) : "—"}
-                </div>
-                {row.type === "auction" ? (
-                  <div className="mt-1 flex items-center gap-2 text-xs text-muted-foreground">
-                    <span>
-                      {n} bid{n === 1 ? "" : "s"}
-                    </span>
-                    {row.reservePrice ? (
-                      <span className="rounded-full bg-secondary px-2 py-0.5 text-secondary-foreground">
-                        Reserve {(row.currentPrice ?? 0) >= row.reservePrice ? "met" : "not met"}
-                      </span>
-                    ) : null}
-                    <span className="ml-auto">
-                      {row.endAt ? `Ends ${new Date(row.endAt).toLocaleString("nb-NO")}` : null}
-                    </span>
-                  </div>
-                ) : null}
-              </div>
-
-              <dl className="grid grid-cols-2 gap-x-3 gap-y-1 text-sm">
-                {row.club && (
-                  <>
-                    <dt className="text-muted-foreground">Club</dt>
-                    <dd>{row.club}</dd>
-                  </>
-                )}
-                {row.season && (
-                  <>
-                    <dt className="text-muted-foreground">Season</dt>
-                    <dd>{row.season}</dd>
-                  </>
-                )}
-                {row.player && (
-                  <>
-                    <dt className="text-muted-foreground">Player</dt>
-                    <dd>{row.player}</dd>
-                  </>
-                )}
-                {row.size && (
-                  <>
-                    <dt className="text-muted-foreground">Size</dt>
-                    <dd>{row.size}</dd>
-                  </>
-                )}
-                {row.condition && (
-                  <>
-                    <dt className="text-muted-foreground">Condition</dt>
-                    <dd>{row.condition}</dd>
-                  </>
-                )}
-              </dl>
-
-              {row.description ? (
-                <div className="rounded-xl border p-3 text-sm">
-                  {translations && row.sourceLanguage && row.sourceLanguage !== "en" ? (
-                    <div className="mb-2 text-xs text-muted-foreground">
-                      Auto-translated from {row.sourceLanguage.toUpperCase()}
-                    </div>
-                  ) : null}
-                  {row.description}
-                </div>
-              ) : null}
-
-              <SuspectedFakeButton listingId={row.id} />
-            </CardContent>
-          </Card>
-        </aside>
+      {/* Title block */}
+      <div className="px-5 pt-5">
+        <h1 className="font-display text-2xl tracking-tight text-foreground">{row.title}</h1>
+        {meta ? <p className="mt-1.5 text-sm text-text-secondary">{meta}</p> : null}
       </div>
 
-      {crossSell.length > 0 ? (
-        <section className="space-y-3">
-          <h2 className="font-display text-2xl">Other jerseys in size {row.size}</h2>
-          <div className="grid grid-cols-2 gap-3 md:grid-cols-3 lg:grid-cols-6">
-            {crossSell.map((c) => (
-              <Link key={c.id} href={`/l/${c.id}`}>
-                <Card className="overflow-hidden">
-                  <div className="aspect-square bg-muted">
-                    {c.firstImage ? (
-                      // eslint-disable-next-line @next/next/no-img-element
-                      <img
-                        src={publicImageUrl(c.firstImage, { w: 400, h: 400, fit: "cover" })}
-                        alt={c.title}
-                        className="h-full w-full object-cover"
-                      />
-                    ) : null}
-                  </div>
-                  <CardContent className="p-2">
-                    <div className="text-xs font-medium line-clamp-1">{c.title}</div>
-                    <div className="text-xs text-muted-foreground">
-                      {c.price ? formatNOK(c.price) : "—"}
-                    </div>
-                  </CardContent>
-                </Card>
-              </Link>
-            ))}
-          </div>
-        </section>
+      {/* Auction / Buy Now */}
+      <div data-auction-block>
+        <AuctionBlock
+          listingId={row.id}
+          type={row.type}
+          currentPrice={row.currentPrice ?? row.startPrice ?? 0}
+          startPrice={row.startPrice ?? undefined}
+          endAt={row.endAt}
+          bidCount={bidCount}
+          status={isEnded ? "ended" : "live"}
+        />
+      </div>
+
+      {/* Seller */}
+      <SellerCard
+        handle={row.sellerHandle}
+        name={row.sellerName}
+        isVerified={row.sellerVerified}
+      />
+
+      {/* Shirt details */}
+      <ShirtDetailsGrid
+        team={row.club}
+        season={row.season}
+        player={row.player}
+        size={row.size}
+        condition={row.condition}
+        authenticity={row.authenticity}
+      />
+
+      {/* Verification */}
+      <VerificationSection
+        steps={[
+          {
+            text: row.sellerVerified
+              ? `AI analysis confirmed as genuine ${row.season ?? ""} ${row.club ?? ""} shirt.`
+              : "AI verification pending.",
+            completed: !!row.sellerVerified,
+          },
+          { text: "Expert review by Oase authentication team.", completed: false },
+          {
+            text: row.sellerVerified
+              ? "Seller verified via BankID."
+              : "Seller identity not yet verified.",
+            completed: !!row.sellerVerified,
+          },
+        ]}
+      />
+
+      {/* Description */}
+      {row.description ? (
+        <div className="px-4 pt-5">
+          <h2 className="mb-3.5 font-display text-lg font-semibold tracking-tight text-foreground">
+            Description
+          </h2>
+          <p className="whitespace-pre-wrap text-sm text-text-secondary" style={{ lineHeight: 1.65 }}>
+            {row.description}
+          </p>
+        </div>
       ) : null}
+
+      {/* Bid history */}
+      <BidHistory
+        bids={recentBids.map((b, i) => ({
+          username: b.bidderHandle ?? b.bidderName ?? "Bidder",
+          amount: b.amount,
+          timestamp: b.placedAt.toISOString(),
+          isHighest: i === 0,
+        }))}
+      />
+
+      {/* Similar items */}
+      <SimilarItems
+        items={crossSell.map((c) => ({
+          id: c.id,
+          title: c.club ?? c.title,
+          detail: [c.player, c.size].filter(Boolean).join(" · "),
+          price: c.price,
+          type: c.type,
+          timeRemaining: c.type === "auction" && c.endAt ? timeLeft(c.endAt) : undefined,
+          firstImage: c.firstImage,
+        }))}
+      />
+
+      {/* Sticky bottom bar */}
+      <StickyBottomBar
+        price={row.currentPrice ?? row.startPrice ?? row.buyNowPrice ?? 0}
+        type={row.type}
+        status={isEnded ? "ended" : "live"}
+      />
     </div>
   );
 }
