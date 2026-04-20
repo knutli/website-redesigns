@@ -5,7 +5,6 @@ import { usePathname } from "next/navigation";
 import {
   Home,
   Search,
-  Heart,
   Shirt,
   Gavel,
   Settings,
@@ -14,9 +13,9 @@ import {
   LayoutDashboard,
   ShoppingBag,
   Target,
-  Layers,
   Wallet,
   Receipt,
+  User,
   Moon,
   Sun,
 } from "lucide-react";
@@ -24,20 +23,17 @@ import { useTheme } from "next-themes";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 
-type Item = { href: string; label: string; icon: React.ComponentType<{ className?: string }> };
+type Item = {
+  href: string;
+  label: string;
+  icon: React.ComponentType<{ className?: string }>;
+  exact?: boolean;
+};
 
 const primary: Item[] = [
-  { href: "/", label: "Feed", icon: Home },
+  { href: "/", label: "Feed", icon: Home, exact: true },
   { href: "/browse", label: "Browse", icon: Search },
-];
-
-const discover: Item[] = [
-  { href: "/discover/collections", label: "Collections", icon: Layers },
   { href: "/wanted", label: "Wanted", icon: Target },
-];
-
-const yours: Item[] = [
-  { href: "/wishlist", label: "Wishlist", icon: Heart },
   { href: "/locker", label: "Locker", icon: Shirt },
 ];
 
@@ -49,14 +45,19 @@ const buying: Item[] = [
 ];
 
 const selling: Item[] = [
-  { href: "/selling", label: "Dashboard", icon: LayoutDashboard },
+  { href: "/selling", label: "Dashboard", icon: LayoutDashboard, exact: true },
   { href: "/selling/awaiting-payment", label: "Awaiting Payment", icon: ShoppingBag },
   { href: "/selling/ready-to-ship", label: "Ready to Ship", icon: Truck },
   { href: "/selling/wallet", label: "Wallet", icon: Wallet },
 ];
 
-function Row({ href, label, icon: Icon, pathname }: Item & { pathname: string }) {
-  const active = pathname === href || (href !== "/" && pathname.startsWith(href));
+function isActive(pathname: string, href: string, exact?: boolean) {
+  if (exact) return pathname === href;
+  return pathname === href || pathname.startsWith(`${href}/`);
+}
+
+function Row({ href, label, icon: Icon, exact, pathname }: Item & { pathname: string }) {
+  const active = isActive(pathname, href, exact);
   return (
     <Link
       href={href}
@@ -113,7 +114,7 @@ function ThemeToggleInline() {
     <button
       type="button"
       onClick={() => setTheme(theme === "light" ? "dark" : "light")}
-      className="flex items-center gap-3 border-b border-border px-0 py-2.5 text-sm font-medium text-text-secondary transition-colors hover:text-foreground"
+      className="flex items-center gap-3 px-0 py-2.5 text-sm font-medium text-text-secondary transition-colors hover:text-foreground"
     >
       <Sun className="h-[18px] w-[18px] text-text-tertiary dark:hidden" />
       <Moon className="hidden h-[18px] w-[18px] text-text-tertiary dark:block" />
@@ -146,18 +147,21 @@ export function SidebarNav({
         </div>
       ) : null}
 
-      <div className="min-h-0 flex-1">
+      <div className="min-h-0 flex-1 overflow-y-auto">
         <Section items={primary} pathname={pathname} />
-        <Section title="Discover" items={discover} pathname={pathname} />
-        <Section items={yours} pathname={pathname} />
         <Section title="Buying" items={buying} pathname={pathname} />
         <Section title="Selling" items={selling} pathname={pathname} />
       </div>
 
-      <div className="shrink-0 space-y-2 pt-2">
+      <div className="shrink-0 border-t border-border pt-2">
+        <Row href="/profile" label="Profile" icon={User} pathname={pathname} />
         <Row href="/settings" label="Settings" icon={Settings} pathname={pathname} />
         <ThemeToggleInline />
-        {variant === "desktop" ? <CreateCTAs /> : null}
+        {variant === "desktop" ? (
+          <div className="pt-2">
+            <CreateCTAs />
+          </div>
+        ) : null}
       </div>
     </nav>
   );
