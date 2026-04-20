@@ -49,5 +49,5 @@ export async function POST(req: Request) {
     }
   }
 
-  return NextResponse.redirect(new URL(`/wanted/${w.id}`, req.url));
+  return NextResponse.json({ id: w.id });
 }
