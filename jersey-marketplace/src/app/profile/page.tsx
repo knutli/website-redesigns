@@ -61,6 +61,7 @@ export default async function ProfilePage() {
           <h1 className="font-display text-2xl text-foreground">
             {u.handle ? `@${u.handle}` : u.name ?? "Your profile"}
           </h1>
+          <p className="mt-0.5 text-xs text-text-tertiary">{u.email}</p>
           {u.bio ? <p className="mt-1 text-sm text-text-secondary line-clamp-2">{u.bio}</p> : null}
           <div className="mt-1.5 flex gap-4 text-xs text-text-tertiary">
             {u.location ? <span>{u.location}</span> : null}
