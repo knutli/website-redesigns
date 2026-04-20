@@ -4,27 +4,7 @@ import { Button } from "@/components/ui/button";
 export default function FeedPage() {
   return (
     <div className="space-y-6">
-      {/* Feed tabs */}
-      <div className="flex border-b border-border">
-        {["All", "Following", "My Bids"].map((tab, i) => (
-          <button
-            key={tab}
-            type="button"
-            className={`flex-1 pb-3 pt-2 text-sm font-medium transition-colors ${
-              i === 0
-                ? "font-semibold text-foreground"
-                : "text-text-tertiary hover:text-foreground"
-            }`}
-          >
-            {tab}
-            {i === 0 ? (
-              <div className="mx-[20%] mt-2.5 h-0.5 rounded-full bg-green-400" />
-            ) : null}
-          </button>
-        ))}
-      </div>
-
-      {/* Empty state — richly styled */}
+      {/* Empty state */}
       <div className="mx-3.5 space-y-6 py-8 text-center">
         <div className="mx-auto max-w-sm space-y-3">
           <h2 className="font-display text-2xl text-foreground">
