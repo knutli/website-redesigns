@@ -1,0 +1,27 @@
+{
+  "name": "finn-jersey-scraper",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Crawl a Finn.no seller's jersey listings, extract structured fields, download images.",
+  "scripts": {
+    "scrape": "tsx src/index.ts",
+    "build": "tsc -p .",
+    "typecheck": "tsc -p . --noEmit"
+  },
+  "dependencies": {
+    "@anthropic-ai/sdk": "^0.40.1",
+    "cheerio": "^1.0.0",
+    "commander": "^12.1.0",
+    "dotenv": "^16.4.5",
+    "undici": "^6.21.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.0",
+    "tsx": "^4.19.2",
+    "typescript": "^5.7.2"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}
